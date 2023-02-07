@@ -7,6 +7,7 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
+
 class Aranzman(models.Model):
     naziv = models.CharField(max_length=32)
     napomena = models.TextField()
@@ -179,6 +180,7 @@ class KategorijaSmestaja(models.Model):
 
 class Kontinent(models.Model):
     naziv = models.CharField(max_length=60)
+    slika = models.CharField(max_length=256)
 
     class Meta:
         managed = False

@@ -1,3 +1,11 @@
+# 07. februar 2023.
+
+### css/home.css:
+- .box img izmenjen u object-fit: cover da se ne bi sirila slika
+
+### index:
+- Kontinenti i putanje slika kontinenata se sada ucitavaju iz baze
+
 # 06. februar 2023. - pocetak
 
 ### Projekat:

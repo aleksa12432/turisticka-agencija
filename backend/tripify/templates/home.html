@@ -53,35 +53,12 @@
   <h1 class="heading-title">Various destinations across 6 continents!</h1>
 
   <div class="box-container">
+    {% for kontinent in kontinenti %}
     <div class="box">
-      <img src="{% static 'images/europe.jpg' %}" alt="" />
-      <h3>Europe</h3>
+      <img src="{% static kontinent.slika %}" alt="" />
+      <h3>{{ kontinent.naziv }}</h3>
     </div>
-
-    <div class="box">
-      <img src="{% static 'images/africa.jpg' %}" alt="" />
-      <h3>Africa</h3>
-    </div>
-
-    <div class="box">
-      <img src="{% static 'images/asia.jpg' %}" alt="" />
-      <h3>Asia</h3>
-    </div>
-
-    <div class="box">
-      <img src="{% static 'images/namerica.jpg' %}" alt="" />
-      <h3>North America</h3>
-    </div>
-
-    <div class="box">
-      <img src="{% static 'images/samerica.jpg' %}" alt="" />
-      <h3>South America</h3>
-    </div>
-
-    <div class="box">
-      <img src="{% static 'images/australia.jpg' %}" alt="" />
-      <h3>Australia</h3>
-    </div>
+    {% endfor %}
   </div>
 </section>
 

@@ -98,6 +98,7 @@
 .services .box-container .box img {
   height: 7rem;
   width: 100%;
+  object-fit: cover;
 }
 
 .home-about {

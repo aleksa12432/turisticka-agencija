@@ -1,0 +1,16 @@
+# TODO:
+- [ ] Prepravi bazu da prati zahteve
+- [ ] Pronadji 30 fotografija za smestaje
+- [ ] Popuni bazu podacima
+    - [ ] Popuni 30 drzava
+        - [X] Napravi algoritam koji bira
+    - [ ] Popuni 90 gradova
+        - [X] Napravi algoritam koji bira
+    - [ ] Popuni tipove smestaja
+        - [ ] Napravi algoritam koji bira
+    - [ ] Popuni tipove smestaja
+        - [ ] Napravi algoritam koji bira
+    - [ ] Popuni tipove prevoza
+        - [ ] Napravi algoritam koji bira
+    - [ ] Popuni slike gradova
+        - [ ] Napravi algoritam koji bira
