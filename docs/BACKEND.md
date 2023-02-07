@@ -1,2 +1,5 @@
 # Osnovne informacije:
-- U upotrebi je python framework django
+- Upotrebljene biblioteke/framework-ovi:
+    - Django
+    - pandas
+    - numpy
