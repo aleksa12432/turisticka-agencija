@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from .models import Kontinent
+from .models import Continent, City
 
 def index(request):
-    kontinenti = Kontinent.objects.all()
+    kontinenti = Continent.objects.all()
     return render(request, 'home.html', {'kontinenti': kontinenti})
 
 def about(request):

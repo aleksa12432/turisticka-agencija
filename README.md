@@ -8,3 +8,7 @@
 - [Frontend changelog](frontend/CHANGELOG.md)
 - [Backend changelog](backend/CHANGELOG.md)
 - [Project changelog](./CHANGELOG.md)
+
+## Ostalo:
+- [ToDo](./TODO.md)
+- [Specifikacija](./SPECIFIKACIJA.md)
