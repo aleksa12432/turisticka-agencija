@@ -1,3 +1,19 @@
+# 08. februar 2023.
+
+### tripify/models.py:
+- Rekonstruisani svi modeli tako da se poklapaju sa [specifikacijom](/SPECIFIKACIJA.md)
+
+### tripify/migrations/0002_continent.py:
+- Napravljena pocetna migracija za kontinenta
+
+### tripify/migrations/0003_countries_cities.py:
+- Napravljena migracija za gradove i drzave, slike se ucitavaju pomocu google search API, pretragom grada, konvertuju sliku u 400x300 webp format
+
+### tripify/admin.py:
+- Sada ucitava samo tabele koje su potrebne adminu da edituje
+
+### google images api me limitirao, moram sutra da dodajem slike :(
+
 # 07. februar 2023.
 
 ### css/home.css:

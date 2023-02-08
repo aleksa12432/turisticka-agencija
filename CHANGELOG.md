@@ -1,3 +1,8 @@
+# 08. februar 2023.
+
+### baza:
+- Obrisana cela baza, sada se generise kroz backend kod
+
 # 07. februar 2023.
 
 ### baza:
