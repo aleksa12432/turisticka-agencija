@@ -3,6 +3,9 @@
 ### baza:
 - Obrisana cela baza, sada se generise kroz backend kod
 
+### TODO.md:
+- Dodatno popunjen
+
 # 07. februar 2023.
 
 ### baza:

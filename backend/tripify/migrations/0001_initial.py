@@ -59,7 +59,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("name", models.CharField(max_length=100)),
-                ("image", models.ImageField(upload_to="static/")),
+                ("image", models.ImageField(upload_to="tripify/static/")),
                 (
                     "country",
                     models.ForeignKey(

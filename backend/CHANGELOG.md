@@ -1,3 +1,32 @@
+# 09. februar 2023.
+
+### tripify/models.py:
+- prepravljen upload_to na tripify/static
+- dodato jos modela
+
+### tripify/migrations/0002_continent.py:
+- Dodat verbose
+
+### tripify/migrations/0005_tipovi_smestaja_tipovi_sobe.py:
+- Unosi tipove smestaja i tipove soba
+
+### tripify/migrations/0006_tipovi_prevoza.py:
+- Unosi tipove prevoza
+
+### tripify/migrations/0009_smestaji.py:
+- Unosi smestaje (3 po gradu - config na vrhu)
+
+### resources/slike_smestaja/:
+- Preuzeto 30 slika za smestaje
+
+### tripify/migrations/0003_countries_cities.py:
+- Google images api limitira na samo 100 requesta dnevno, nedovoljno za testiranje
+- Prelazimo na bing koji dozvoljava 1000 mesecno, 3 req/s
+- __RADI!!!__ 🙏
+- Dodat verbose
+- Prepravljene pretrage na "{imepretrage} city" za sledece pokretanje
+
+
 # 08. februar 2023.
 
 ### tripify/models.py:

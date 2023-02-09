@@ -5,13 +5,13 @@
 - Django
 - Pandas
 - Pillow
-- GoogleImagesSearch
+- ~~GoogleImagesSearch~~
 
 # Pokretanje:
 
 ### Prvi put:
 ```bash
-python -m pip install Django pandas pillow Google-Images-Search
+python -m pip install Django pandas pillow
 ```
 
 ### Sa instaliranim bibliotekama:

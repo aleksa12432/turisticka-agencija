@@ -11,6 +11,8 @@ def add_continents(apps, schema_editor):
         ("South America",'images/samerica.jpg'),
     ]
 
+    print("Popunjavam kontinente...")
+
     Continent.objects.bulk_create([Continent(name=name, image=image) for name, image in continents])
 
 class Migration(migrations.Migration):
