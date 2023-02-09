@@ -3,7 +3,8 @@ from .models import Continent, City
 
 def index(request):
     kontinenti = Continent.objects.all()
-    return render(request, 'home.html', {'kontinenti': kontinenti})
+    gradovi = City.objects.all()
+    return render(request, 'home.html', { 'kontinenti': kontinenti, 'gradovi': gradovi })
 
 def about(request):
     return render(request, 'about.html')

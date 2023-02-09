@@ -1,15 +1,19 @@
 # TODO:
 - [ ] Prepravi bazu da prati zahteve
-- [ ] Pronadji 30 fotografija za smestaje
+- [X] Pronadji 30 fotografija za smestaje
 - [ ] Popuni bazu podacima
     - [X] Popuni kontinente
     - [X] Popuni 30 drzava
         - [X] Napravi algoritam koji bira
     - [X] Popuni 90 gradova
         - [X] Napravi algoritam koji bira
-    - [ ] Popuni slike gradova
+    - [X] Popuni slike gradova
         - [X] Napravi algoritam koji bira
-    - [ ] Popuni tipove smestaja
-        - [ ] Napravi algoritam koji bira
-    - [ ] Popuni tipove prevoza
-        - [ ] Napravi algoritam koji bira
+    - [X] Popuni tipove smestaja
+    - [X] Popuni tipove prevoza
+    - [X] Popuni smestaje
+        - [X] Napravi algoritam koji bira
+    - [ ] Popuni slike smestaja
+    - [ ] Popuni aranzmane
+- [ ] Napravi rezervacije
+- [ ] Napravi auth korisnika

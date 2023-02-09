@@ -1,21 +1,44 @@
 from django.db import migrations
 import pandas as pd
 import requests
-from google_images_search import GoogleImagesSearch
 from PIL import Image
 from io import BytesIO
+from django.core.files import File
 
 BROJ_DRZAVA = 30
 BROJ_GRADOVA = 90
 
-API_KEY = 'AIzaSyBHzOoMnnAS_LtpfEzjkvPbVqC58qV-YKw'
-CX = 'a6540a55c7e634a15'
+SUBSCRIPTION_KEY = "a57ab44065774e448bf14a50de5e30fc"
+SEARCH_URL = "https://api.bing.microsoft.com/v7.0/images/search"
 
 def jednako(df, imekolone, br):
     grouped = df.groupby(imekolone)
     sampled = grouped.apply(lambda x: x.sample(br))
 
     return sampled
+
+# prima string search_term, vraca url pronadjene slike
+def pronadji_sliku(search_term):
+
+    print(f"Trazim sliku za {search_term}...")
+
+    params = {
+        "q": search_term, 
+        "count": 1
+    }
+
+    headers = {"Ocp-Apim-Subscription-Key" : SUBSCRIPTION_KEY}
+
+    response = requests.get(SEARCH_URL, headers=headers, params=params)
+    response.raise_for_status()
+
+    search_results = response.json()
+
+    img_url = search_results["value"][0]["thumbnailUrl"]
+
+    print(f"Pronadjena slika: {img_url}")
+    
+    return img_url
 
 def add_countries_and_cities(apps, schema_editor):
 
@@ -39,12 +62,16 @@ def add_countries_and_cities(apps, schema_editor):
     # filtriramo drzave koje imaju manje od 3 gradova
     filtered_df = merged_df[merged_df["city_count"] >= 3].drop("city_count", axis=1)
 
+    print(f"Biram {BROJ_DRZAVA} nasumicnih drzava...")
+
     # uzimamo BROJ_DRZAVA/BROJ_KONTINENATA 
     # nasumicnih drzava sa jednakim brojem drzava po kontinentu
     countries = jednako(filtered_df, "continent", int(BROJ_DRZAVA/6))
 
     # uzimamo samo gradove cije su drzave u listi countries
     dfMergedCities = pd.merge(dfCities, countries, on='country')
+
+    print(f"Biram {BROJ_GRADOVA} nasumicnih gradova...")
     
     # uzimamo BROJ_GRADOVA/BROJ_DRZAVA gradova sa jednakim brojem
     # gradova po drzavi
@@ -60,41 +87,45 @@ def add_countries_and_cities(apps, schema_editor):
         continent=Continent.objects.get(name=record['continent']),
     ) for record in country_dict]
 
+    print("Popunjavam drzave...")
+
     # pravimo drzave
     Country.objects.bulk_create(country_instances)
 
     city_instances = []
 
-    print(cities_dict)
-
+    print("Pocinjem popunjavanje gradova sa slikama...")
 
     for city in cities_dict:
         city_name = city["city"]
         country_name = city["country"]
-        gis = GoogleImagesSearch(API_KEY, CX) # ucitavamo google images search api sa datim api_key i CX
-        search_params = {
-            'q': city_name, # trazimo ime grada na google images
-            'num': 1 # uzimamo samo 1 sliku
-        }
-        # print(search_params)
-        gis.search(search_params=search_params) # pretrazujemo sa datim parametrima
-        result = gis.results()[0] # uzimamo prvi rezultat pretrage
-        url = result.url # cuvamo url
 
-        response = requests.get(url) # pomocu requests biblioteke cuvamo sliku kao response
+        print(f"Ucitavam: {country_name} - {city_name}")
 
-        img = Image.open(BytesIO(response.content)) # pravimo sliku od response-a
-        img.thumbnail((400, 300)) # rescale-ujemo na 400x300
+        url = pronadji_sliku(city_name)
+
+        image_data = requests.get(url) # pomocu requests biblioteke cuvamo sliku kao response
+
+        img = Image.open(BytesIO(image_data.content)) # pravimo sliku od response-a
+
+        img.thumbnail((400, 300), Image.Resampling.LANCZOS) # rescale-ujemo na 400x300
+
         output_buffer = BytesIO()
 
         img.save(output_buffer, format='webp') # upisujemo sliku u output_buffer u webp format
+        
+        image_file = File(output_buffer, name=f'{city_name}.webp')
 
         # dodajemo grad na listu
         city_instances.append(City( 
             name=city_name, 
             country=Country.objects.get(name=country_name),
-            image=File(output_buffer, name='{}.webp'.format(city_name)))) # django ima da handluje upload fajla
-        
+            image=image_file # django ima da handluje upload fajla
+        )) 
+
+    print("Popunjavam gradove...")
+
+    # raise NotImplementedError("Nije gotovo!")
     City.objects.bulk_create(city_instances) # pravimo gradove
 
 
@@ -103,7 +134,6 @@ class Migration(migrations.Migration):
     dependencies = [
         ("tripify", "0002_continent"),
     ]
-
 
     operations = [
         migrations.RunPython(add_countries_and_cities)
