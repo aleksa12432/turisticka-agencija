@@ -72,3 +72,29 @@ class Smestaj_slika(models.Model):
     img = models.ImageField(upload_to='tripify/static')
     smestaj = models.ForeignKey(Smestaj, on_delete=models.CASCADE)
 
+class Aranzman(models.Model):
+    naziv = models.CharField(max_length=255, unique=True)
+    opis = models.CharField(max_length=512)
+    prevoz = models.ForeignKey(Tip_prevoza, on_delete=models.CASCADE)
+    smestaj = models.ForeignKey(Tipovi_smestaja, on_delete=models.CASCADE)
+    cena = models.IntegerField(
+        validators=[
+            MaxValueValidator(3000),
+            MinValueValidator(500)
+        ]
+    )
+    polazak = models.DateTimeField()
+    duzina = models.IntegerField( # duzina u danima
+        validators=[ # 1 do 2 nedelje
+            MaxValueValidator(14),
+            MinValueValidator(7)
+        ]
+    )
+
+    def __str__(self):
+        return self.naziv
+
+class Termin(models.Model):
+    aranzman = models.ForeignKey(Aranzman, on_delete=models.CASCADE)
+    smestaj = models.ForeignKey(Smestaj, on_delete=models.CASCADE)
+    vreme_stizanja = models.DateTimeField()

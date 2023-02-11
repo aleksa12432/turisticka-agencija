@@ -88,56 +88,34 @@
 <!-- home packages section starts  -->
 
 <section class="home-packages">
-  <h1 class="heading-title">our packages</h1>
+  <h1 class="heading-title">our arrangements</h1>
 
   <div class="box-container">
-    <div class="box">
-      <div class="image">
-        <img src="{% static 'images/p-1.jpg' %}" alt="" />
-      </div>
-      <div class="content">
-        <h3>Mumbai February 2023</h3>
-        <div class="grid--2-cols details-container">
-          <p><i class="fas fa-location-arrow"></i><span>Mumbai</span></p>
-          <p><i class="fas fa-plane"></i><span>Airplane</span></p>
-          <p><i class="fas fa-calendar"></i><span>3.2.2023</span></p>
-          <p><i class="fas fa-calendar"></i><span>15 days</span></p>
-        </div>
-        <a href="{% url 'vacation' %}" class="btn">book now</a>
-      </div>
-    </div>
+
+    {% for aranzman in aranzmani %}
 
     <div class="box">
       <div class="image">
-        <img src="{% static 'images/p-2.jpg' %}" alt="" />
+        <img src="{{ aranzman.1.smestaj.grad.image.url }}" alt="" />
       </div>
       <div class="content">
-        <h3>Hawaii February 2023</h3>
+        <h3>{{ aranzman.0.naziv }}</h3>
         <div class="grid--2-cols details-container">
-          <p><i class="fas fa-location-arrow"></i><span>Hawaii</span></p>
-          <p><i class="fas fa-plane"></i><span>Airplane</span></p>
-          <p><i class="fas fa-calendar"></i><span>3.2.2023</span></p>
-          <p><i class="fas fa-calendar"></i><span>15 days</span></p>
+          <p><i class="fas fa-location-arrow"></i><span> 
+            {{ aranzman.1.smestaj.grad.name }} 
+          </span></p>
+          <p><i class="fas fa-globe-europe"></i><span>{{ aranzman.0.prevoz.name }}</span></p>
+          <p><i class="fas fa-calendar"></i><span>
+            {{ aranzman.0.polazak|date:'d. m. Y.' }}
+          </span></p>
+          <p><i class="fas fa-calendar"></i><span>{{ aranzman.0.duzina }} days</span></p>
+          <p><i class="fas fa-euro-sign"></i><span>{{ aranzman.2 }}</span></p>
         </div>
         <a href="{% url 'vacation' %}" class="btn">book now</a>
       </div>
     </div>
+    {% endfor %}
 
-    <div class="box">
-      <div class="image">
-        <img src="{% static 'images/p-3.jpg' %}" alt="" />
-      </div>
-      <div class="content">
-        <h3>Sydney February 2023</h3>
-        <div class="grid--2-cols details-container">
-          <p><i class="fas fa-location-arrow"></i><span>Sydney</span></p>
-          <p><i class="fas fa-plane"></i><span>Airplane</span></p>
-          <p><i class="fas fa-calendar"></i><span>3.2.2023</span></p>
-          <p><i class="fas fa-calendar"></i><span>15 days</span></p>
-        </div>
-        <a href="{% url 'vacation' %}" class="btn">book now</a>
-      </div>
-    </div>
   </div>
 
   <h1 class="heading-title">Locations</h1>

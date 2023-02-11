@@ -1,7 +1,7 @@
 # TODO:
-- [ ] Prepravi bazu da prati zahteve
+- [X] Prepravi bazu da prati zahteve
 - [X] Pronadji 30 fotografija za smestaje
-- [ ] Popuni bazu podacima
+- [X] Popuni bazu podacima
     - [X] Popuni kontinente
     - [X] Popuni 30 drzava
         - [X] Napravi algoritam koji bira
@@ -13,7 +13,11 @@
     - [X] Popuni tipove prevoza
     - [X] Popuni smestaje
         - [X] Napravi algoritam koji bira
-    - [ ] Popuni slike smestaja
-    - [ ] Popuni aranzmane
+    - [X] Popuni slike smestaja
+    - [X] Popuni aranzmane
+- [X] Prikazi aranzmane na pocetnoj
+- [ ] Napravi prikaz aranzmana sa pretragom i stranicenjem
+- [X] Napravi detaljan prikaz aranzmana
 - [ ] Napravi rezervacije
 - [ ] Napravi auth korisnika
+- [ ] Doradi admin stranicu

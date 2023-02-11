@@ -1,3 +1,23 @@
+# 11. februar 2023. - inicijalizacija podataka zavrsena!
+
+### tripify/migrations/0013_aranzmani.py:
+- Generise aranzmane i termine po specifikaciji
+
+### tripify/admin.py:
+- U admin prikazu dodate ostale tabele
+
+### tripify/views.py:
+- Dodati prikazi 3 najskorija aranzmana
+- vacation sada prima id i prikazuje aranzman sa tim id-em
+
+### tripify/settings.py:
+- USE_TZ postavljen na false
+
+# 10. februar 2023.
+
+### tripify/migrations/0010_slike_smestaja.py:
+- Unosi slike smestaja
+
 # 09. februar 2023.
 
 ### tripify/models.py:

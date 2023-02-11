@@ -4,20 +4,13 @@
 
     <div class="home swiper home-slider">
       <div class="swiper-wrapper">
+        {% for termin in termini %}
         <div
           class="swiper-slide slide"
-          style="background: url({% static 'images/p-1.jpg' %}) no-repeat"
+          style="background: url({{ termin.smestaj.grad.image.url }}) no-repeat"
         ></div>
+        {% endfor %}
 
-        <div
-          class="swiper-slide slide"
-          style="background: url({% static 'images/p-2.jpg' %}) no-repeat"
-        ></div>
-
-        <div
-          class="swiper-slide slide"
-          style="background: url({% static 'images/p-3.jpg' %}) no-repeat"
-        ></div>
       </div>
 
       <div class="swiper-button-next"></div>
@@ -26,41 +19,31 @@
 
     <section class="vacation">
       <div class="details">
-        <h3 class="name">Mumbai February 2023</h3>
+        <h3 class="name">{{ aranzman.naziv }}</h3>
         <div class="info">
-          <p><i class="fas fa-tag"></i><span>$290</span></p>
+          <p><i class="fas fa-tag"></i><span>{{ cena }}€</span></p>
           <p>
-            <i class="fas fa-phone"></i><a href="tel:1234567890">1234567890</a>
+            <ul class="lokacije">
+              {% for termin in termini %}
+              <li class="imegrada">
+                {{ termin.smestaj.grad.name }} - {{ termin.vreme_stizanja|date:'d. m. Y.' }}
+              </li>
+              {% endfor %}
+            </ul>
           </p>
-          <p><i class="fas fa-plane"></i><span>Airplane</span></p>
-          <p><i class="fas fa-calendar"></i><span>1-2-2023</span></p>
-          <p><i class="fas fa-calendar"></i><span>15-2-2023</span></p>
+          <p><i class="fas fa-bed"></i><span>{{ aranzman.smestaj.name }}</span></p>
+          <p><i class="fas fa-globe-europe"></i><span>{{ aranzman.prevoz.name }}</span></p>
+          <p><i class="fas fa-calendar"></i><span>{{ aranzman.polazak|date:'d. m. Y.' }}</span></p>
+          <p><i class="fas fa-calendar"></i><span>{{ aranzman.duzina }} days</span></p>
         </div>
+
+        <h3 class="title">accomodation</h3>
+
+        
+
         <h3 class="title">description</h3>
         <p class="description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
-          cupiditate aliquid ipsum recusandae maxime nisi, velit eaque, libero,
-          exercitationem culpa accusamus. Neque dolor quaerat modi saepe facere
-          dignissimos temporibus molestias. Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Voluptatum cupiditate aliquid ipsum
-          recusandae maxime nisi, velit eaque, libero, exercitationem culpa
-          accusamus. Neque dolor quaerat modi saepe facere dignissimos
-          temporibus molestias. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Voluptatum cupiditate aliquid ipsum recusandae
-          maxime nisi, velit eaque, libero, exercitationem culpa accusamus.
-          Neque dolor quaerat modi saepe facere dignissimos temporibus
-          molestias. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Voluptatum cupiditate aliquid ipsum recusandae maxime nisi, velit
-          eaque, libero, exercitationem culpa accusamus. Neque dolor quaerat
-          modi saepe facere dignissimos temporibus molestias. Lorem ipsum dolor
-          sit amet consectetur adipisicing elit. Voluptatum cupiditate aliquid
-          ipsum recusandae maxime nisi, velit eaque, libero, exercitationem
-          culpa accusamus. Neque dolor quaerat modi saepe facere dignissimos
-          temporibus molestias. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Voluptatum cupiditate aliquid ipsum recusandae
-          maxime nisi, velit eaque, libero, exercitationem culpa accusamus.
-          Neque dolor quaerat modi saepe facere dignissimos temporibus
-          molestias.
+          {{ aranzman.opis|linebreaksbr }}
         </p>
         <a href="{% url 'book' %}" class="btn">book now</a>
       </div>
