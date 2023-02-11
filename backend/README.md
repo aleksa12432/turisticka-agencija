@@ -3,6 +3,9 @@
 ### Alati u upotrebi:
 - Python
 - Django
+- django_extensions
+- pydotplus
+- pygraphviz
 - Pandas
 - Pillow
 - ~~GoogleImagesSearch~~

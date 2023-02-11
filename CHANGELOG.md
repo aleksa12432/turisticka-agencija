@@ -1,3 +1,8 @@
+# 11. februar 2023.
+
+### db/:
+- Dodata slika trenutnog modela baze
+
 # 08. februar 2023.
 
 ### baza:

@@ -82,6 +82,16 @@
   color: var(--light-color);
 }
 
+.lokacije {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.imegrada {
+  font-size: 1.6rem;
+}
+
 .vacation .details .flex .box i {
   color: var(--main-color);
   margin-right: 1.5rem;
