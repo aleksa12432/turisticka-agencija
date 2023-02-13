@@ -1,408 +1,114 @@
 {% extends "__base.html" %}
 {% load static %}
 {% block content %}
+{% load mathfilters %}
+
   <div class="heading"
        style="background: url({% static 'images/header-bg-2.png' %}) no-repeat">
     <h1>packages</h1>
   </div>
   <section class="form-container" data-aos="zoom-in">
-    <form action="">
+    <form action="{% url 'package' %}" method="get">
       <div class="inputBox">
-        <span>Continent</span>
-        <input type="text" placeholder="search by continent" />
+        <span>Name</span>
+        <input type="text" placeholder="search by name" name="name" />
       </div>
       <div class="inputBox">
-        <span>Country</span>
-        <input type="text" placeholder="search by country" />
+        <span>Continent</span>
+        <select name="continent">
+          <option value="">Choose a continent</option>
+          {% for kontinent in kontinenti %}
+          <option value={{ kontinent.id }}>{{ kontinent.name }}</option>
+          {% endfor %}
+      </select>
       </div>
       <div class="inputBox">
         <span>Transport type</span>
-        <input type="text" placeholder="search by type of transport" />
-      </div>
+        <select name="transport">
+          <option value="">Choose a transport type</option>
+          {% for transport in transporti %}
+          <option value={{ transport.id }}>{{ transport.name }}</option>
+          {% endfor %}
+      </select>      </div>
       <div class="inputBox">
         <span>arrivals</span>
-        <input type="date" />
+        <input type="date" name="arrival"/>
       </div>
       <div class="inputBox">
         <span>leaving</span>
-        <input type="date" />
+        <input type="date" name="leaving"/>
       </div>
       <input type="submit" value="Search" class="btn" />
+      <div class="inputBox">
+        <span>results per page</span>
+        <select name="show">
+        <option value="50">50</option>
+        <option value="25">25</option>
+        <option value="100">100</option>
+        <option value="200">200</option>
+        </select>
+      </div>
     </form>
   </section>
+  
   <!-- packages section starts  -->
   <section class="packages">
     <h1 class="heading-title">arrangements</h1>
     <div class="box-container">
+      {% for aranzman in aranzmani %}
+
       <div class="box">
         <div class="image">
-          <img src="{% static 'images/p-1.jpg' %}" alt="" />
+          <img src="/{{ aranzman.slika_grada|cut:'tripify/' }}" alt="" />
         </div>
         <div class="content">
-          <h3>Mumbai February 2023</h3>
-          <div class="price">
-            $290.99 <span>$350.99</span>
-          </div>
+          <h3>{{ aranzman.naziv }}</h3>
           <div class="grid--2-cols details-container">
-            <p>
-              <i class="fas fa-location-arrow"></i><span>Mumbai</span>
-            </p>
-            <p>
-              <i class="fas fa-plane"></i><span>Airplane</span>
-            </p>
-            <p>
-              <i class="fas fa-calendar"></i><span>3.2.2023</span>
-            </p>
-            <p>
-              <i class="fas fa-calendar"></i><span>15 days</span>
-            </p>
+            <p><i class="fas fa-location-arrow"></i><span> 
+              {{ aranzman.ime_grada }} 
+            </span></p>
+            <p><i class="fas fa-globe-europe"></i><span>{{ aranzman.prevoz.name }}</span></p>
+            <p><i class="fas fa-calendar"></i><span>
+              {{ aranzman.polazak|date:'d. m. Y.' }}
+            </span></p>
+            <p><i class="fas fa-calendar"></i><span>{{ aranzman.duzina }} days</span></p>
+            <p><i class="fas fa-euro-sign"></i><span>{{ aranzman.cena_prevoza|addition:aranzman.cena }}</span></p>
           </div>
-          <a href="{% url 'vacation' %}" class="btn">book now</a>
+          <a href="/vacation/?id={{ aranzman.id }}" class="btn">book now</a>
         </div>
       </div>
-      <div class="box">
-        <div class="image">
-          <img src="{% static 'images/p-2.jpg' %}" alt="" />
-        </div>
-        <div class="content">
-          <h3>Hawaii February 2023</h3>
-          <div class="price">
-            $290.99 <span>$350.99</span>
-          </div>
-          <div class="grid--2-cols details-container">
-            <p>
-              <i class="fas fa-location-arrow"></i><span>Hawaii</span>
-            </p>
-            <p>
-              <i class="fas fa-plane"></i><span>Airplane</span>
-            </p>
-            <p>
-              <i class="fas fa-calendar"></i><span>3.2.2023</span>
-            </p>
-            <p>
-              <i class="fas fa-calendar"></i><span>15 days</span>
-            </p>
-          </div>
-          <a href="{% url 'vacation' %}" class="btn">book now</a>
-        </div>
-      </div>
-      <div class="box">
-        <div class="image">
-          <img src="{% static 'images/p-3.jpg' %}" alt="" />
-        </div>
-        <div class="content">
-          <h3>Sydney February 2023</h3>
-          <div class="price">
-            $290.99 <span>$350.99</span>
-          </div>
-          <div class="grid--2-cols details-container">
-            <p>
-              <i class="fas fa-location-arrow"></i><span>Sydney</span>
-            </p>
-            <p>
-              <i class="fas fa-plane"></i><span>Airplane</span>
-            </p>
-            <p>
-              <i class="fas fa-calendar"></i><span>3.2.2023</span>
-            </p>
-            <p>
-              <i class="fas fa-calendar"></i><span>15 days</span>
-            </p>
-          </div>
-          <a href="{% url 'vacation' %}" class="btn">book now</a>
-        </div>
-      </div>
-      <div class="box">
-        <div class="image">
-          <img src="{% static 'images/img-4.jpg' %}" alt="" />
-        </div>
-        <div class="content">
-          <h3>
-            Mumbai February 2023
-          </h3>
-          <div class="price">
-            $290.99 <span>$350.99</span>
-          </div>
-          <div class="grid--2-cols details-container">
-            <p>
-              <i class="fas fa-location-arrow"></i><span>Mumbai</span>
-            </p>
-            <p>
-              <i class="fas fa-plane"></i><span>Airplane</span>
-            </p>
-            <p>
-              <i class="fas fa-calendar"></i><span>3.2.2023</span>
-            </p>
-            <p>
-              <i class="fas fa-calendar"></i><span>15 days</span>
-            </p>
-          </div>
-          <a href="{% url 'vacation' %}" class="btn">book now</a>
-        </div>
-      </div>
-      <div class="box">
-        <div class="image">
-          <img src="{% static 'images/img-5.jpg' %}" alt="" />
-        </div>
-        <div class="content">
-          <h3>
-            Mumbai February 2023
-          </h3>
-          <div class="price">
-            $290.99 <span>$350.99</span>
-          </div>
-          <div class="grid--2-cols details-container">
-            <p>
-              <i class="fas fa-location-arrow"></i><span>Mumbai</span>
-            </p>
-            <p>
-              <i class="fas fa-plane"></i><span>Airplane</span>
-            </p>
-            <p>
-              <i class="fas fa-calendar"></i><span>3.2.2023</span>
-            </p>
-            <p>
-              <i class="fas fa-calendar"></i><span>15 days</span>
-            </p>
-          </div>
-          <a href="{% url 'vacation' %}" class="btn">book now</a>
-        </div>
-      </div>
-      <div class="box">
-        <div class="image">
-          <img src="{% static 'images/img-6.jpg' %}" alt="" />
-        </div>
-        <div class="content">
-          <h3>
-            Mumbai February 2023
-          </h3>
-          <div class="price">
-            $290.99 <span>$350.99</span>
-          </div>
-          <div class="grid--2-cols details-container">
-            <p>
-              <i class="fas fa-location-arrow"></i><span>Mumbai</span>
-            </p>
-            <p>
-              <i class="fas fa-plane"></i><span>Airplane</span>
-            </p>
-            <p>
-              <i class="fas fa-calendar"></i><span>3.2.2023</span>
-            </p>
-            <p>
-              <i class="fas fa-calendar"></i><span>15 days</span>
-            </p>
-          </div>
-          <a href="{% url 'vacation' %}" class="btn">book now</a>
-        </div>
-      </div>
-      <div class="box">
-        <div class="image">
-          <img src="{% static 'images/img-7.jpg' %}" alt="" />
-        </div>
-        <div class="content">
-          <h3>
-            Mumbai February 2023
-          </h3>
-          <div class="price">
-            $290.99 <span>$350.99</span>
-          </div>
-          <div class="grid--2-cols details-container">
-            <p>
-              <i class="fas fa-location-arrow"></i><span>Mumbai</span>
-            </p>
-            <p>
-              <i class="fas fa-plane"></i><span>Airplane</span>
-            </p>
-            <p>
-              <i class="fas fa-calendar"></i><span>3.2.2023</span>
-            </p>
-            <p>
-              <i class="fas fa-calendar"></i><span>15 days</span>
-            </p>
-          </div>
-          <a href="{% url 'vacation' %}" class="btn">book now</a>
-        </div>
-      </div>
-      <div class="box">
-        <div class="image">
-          <img src="{% static 'images/img-8.jpg' %}" alt="" />
-        </div>
-        <div class="content">
-          <h3>
-            Mumbai February 2023
-          </h3>
-          <div class="price">
-            $290.99 <span>$350.99</span>
-          </div>
-          <div class="grid--2-cols details-container">
-            <p>
-              <i class="fas fa-location-arrow"></i><span>Mumbai</span>
-            </p>
-            <p>
-              <i class="fas fa-plane"></i><span>Airplane</span>
-            </p>
-            <p>
-              <i class="fas fa-calendar"></i><span>3.2.2023</span>
-            </p>
-            <p>
-              <i class="fas fa-calendar"></i><span>15 days</span>
-            </p>
-          </div>
-          <a href="{% url 'vacation' %}" class="btn">book now</a>
-        </div>
-      </div>
-      <div class="box">
-        <div class="image">
-          <img src="{% static 'images/img-9.jpg' %}" alt="" />
-        </div>
-        <div class="content">
-          <h3>
-            Mumbai February 2023
-          </h3>
-          <div class="price">
-            $290.99 <span>$350.99</span>
-          </div>
-          <div class="grid--2-cols details-container">
-            <p>
-              <i class="fas fa-location-arrow"></i><span>Mumbai</span>
-            </p>
-            <p>
-              <i class="fas fa-plane"></i><span>Airplane</span>
-            </p>
-            <p>
-              <i class="fas fa-calendar"></i><span>3.2.2023</span>
-            </p>
-            <p>
-              <i class="fas fa-calendar"></i><span>15 days</span>
-            </p>
-          </div>
-          <a href="{% url 'vacation' %}" class="btn">book now</a>
-        </div>
-      </div>
-      <div class="box">
-        <div class="image">
-          <img src="{% static 'images/img-10.jpg' %}" alt="" />
-        </div>
-        <div class="content">
-          <h3>
-            Mumbai February 2023
-          </h3>
-          <div class="price">
-            $290.99 <span>$350.99</span>
-          </div>
-          <div class="grid--2-cols details-container">
-            <p>
-              <i class="fas fa-location-arrow"></i><span>Mumbai</span>
-            </p>
-            <p>
-              <i class="fas fa-plane"></i><span>Airplane</span>
-            </p>
-            <p>
-              <i class="fas fa-calendar"></i><span>3.2.2023</span>
-            </p>
-            <p>
-              <i class="fas fa-calendar"></i><span>15 days</span>
-            </p>
-          </div>
-          <a href="{% url 'vacation' %}" class="btn">book now</a>
-        </div>
-      </div>
-      <div class="box">
-        <div class="image">
-          <img src="{% static 'images/img-11.jpg' %}" alt="" />
-        </div>
-        <div class="content">
-          <h3>
-            Mumbai February 2023
-          </h3>
-          <div class="price">
-            $290.99 <span>$350.99</span>
-          </div>
-          <div class="grid--2-cols details-container">
-            <p>
-              <i class="fas fa-location-arrow"></i><span>Mumbai</span>
-            </p>
-            <p>
-              <i class="fas fa-plane"></i><span>Airplane</span>
-            </p>
-            <p>
-              <i class="fas fa-calendar"></i><span>3.2.2023</span>
-            </p>
-            <p>
-              <i class="fas fa-calendar"></i><span>15 days</span>
-            </p>
-          </div>
-          <a href="{% url 'vacation' %}" class="btn">book now</a>
-        </div>
-      </div>
-      <div class="box">
-        <div class="image">
-          <img src="{% static 'images/img-12.jpg' %}" alt="" />
-        </div>
-        <div class="content">
-          <h3>
-            Mumbai February 2023
-          </h3>
-          <div class="price">
-            $290.99 <span>$350.99</span>
-          </div>
-          <div class="grid--2-cols details-container">
-            <p>
-              <i class="fas fa-location-arrow"></i><span>Mumbai</span>
-            </p>
-            <p>
-              <i class="fas fa-plane"></i><span>Airplane</span>
-            </p>
-            <p>
-              <i class="fas fa-calendar"></i><span>3.2.2023</span>
-            </p>
-            <p>
-              <i class="fas fa-calendar"></i><span>15 days</span>
-            </p>
-          </div>
-          <a href="{% url 'vacation' %}" class="btn">book now</a>
-        </div>
-      </div>
-    </div>
-    <div class="pagination">
-      <button class="btn">
-        <svg xmlns="http://www.w3.org/2000/svg"
-             class="btn-icon"
-             fill="none"
-             viewBox="0 0 24 24"
-             stroke="currentColor">
-          <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M15 19l-7-7 7-7"
-          />
-        </svg>
-      </button>
-      <a href="#" class="page-link page-link--current">1</a>
-      <a href="#" class="page-link">2</a>
-      <a href="#" class="page-link">3</a>
-      <a href="#" class="page-link">4</a>
-      <a href="#" class="page-link">5</a>
-      <a href="#" class="page-link">6</a>
-      <span class="dots">...</span>
-      <a href="#" class="page-link">23</a>
-      <button class="btn">
-        <svg xmlns="http://www.w3.org/2000/svg"
-             class="btn-icon"
-             fill="none"
-             viewBox="0 0 24 24"
-             stroke="currentColor">
-          <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M9 5l7 7-7 7"
-          />
-        </svg>
-      </button>
+      {% endfor %}
     </div>
   </section>
+
+  <div class="pagination">
+    <span class="step-links">
+        {% if aranzmani.has_previous %}
+          {% if '?' in request.get_full_path %}
+            <a href="{{ request.get_full_path }}&page=1">&laquo; first</a>
+            <a href="{{ request.get_full_path }}&page={{ aranzmani.previous_page_number }}">previous</a>
+          {% else %}
+          <a href="{{ request.get_full_path }}?page=1">&laquo; first</a>
+            <a href="{{ request.get_full_path }}?page={{ aranzmani.previous_page_number }}">previous</a>
+          {% endif %}
+        {% endif %}
+  
+        <span class="current">
+            Page {{ aranzmani.number }} of {{ aranzmani.paginator.num_pages }}.
+        </span>
+  
+        {% if aranzmani.has_next %}
+          {% if '?' in request.get_full_path %}
+            <a href="{{ request.get_full_path }}&page={{ aranzmani.next_page_number }}">next</a>
+            <a href="{{ request.get_full_path }}&page={{ aranzmani.paginator.num_pages }}">last &raquo;</a>
+          {% else %}
+          <a href="{{ request.get_full_path }}?page={{ aranzmani.next_page_number }}">next</a>
+            <a href="{{ request.get_full_path }}?page={{ aranzmani.paginator.num_pages }}">last &raquo;</a>
+          {% endif %}
+        {% endif %}
+    </span>
+  </div>
+  
   <!-- packages section ends -->
+
 {% endblock content %}

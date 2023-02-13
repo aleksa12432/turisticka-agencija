@@ -16,8 +16,9 @@
     - [X] Popuni slike smestaja
     - [X] Popuni aranzmane
 - [X] Prikazi aranzmane na pocetnoj
-- [ ] Napravi prikaz aranzmana sa pretragom i stranicenjem
+- [X] Napravi prikaz aranzmana sa pretragom i stranicenjem
 - [X] Napravi detaljan prikaz aranzmana
 - [ ] Napravi rezervacije
 - [ ] Napravi auth korisnika
-- [ ] Doradi admin stranicu
+- [X] Doradi admin stranicu
+- [X] Dodaj dokumentaciju

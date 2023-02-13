@@ -104,3 +104,29 @@
   color: var(--light-color);
   line-height: 1.5;
 }
+
+
+.smestaj {
+  font-size: 1.2rem;
+}
+
+.smestaj .naziv {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.smestaj .additional {
+  display: flex;
+  gap: 10px;
+}
+
+.smestaj .grid {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+
+.smestaj .grid img {
+  margin: 0 auto;
+  width: min(400px, 100%);
+}

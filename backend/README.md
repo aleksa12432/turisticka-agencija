@@ -1,23 +1,42 @@
 # turisticka-agencija-backend
 
-### Alati u upotrebi:
+### [CHANGELOG](./CHANGELOG.md)
+
+### Alati/biblioteke u upotrebi:
 - Python
 - Django
-- django_extensions
+- django-extensions
 - pydotplus
-- pygraphviz
 - Pandas
 - Pillow
 - ~~GoogleImagesSearch~~
+- django-mathfilters
+- requests
 
 # Pokretanje:
 
 ### Prvi put:
 ```bash
-python -m pip install Django pandas pillow
+pip install Django 
+pip install pandas
+pip install Pillow 
+pip install django-extensions
+pip install pydotplus
+pip install django-mathfilters
+pip install requests
 ```
 
 ### Sa instaliranim bibliotekama:
+```bash
+python manage.py migrate
+```
+
+### Testiranje:
+```bash
+python manage.py test
+```
+
+### Konacno pokretanje:
 ```bash
 python manage.py runserver
 ```

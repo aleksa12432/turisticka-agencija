@@ -1,0 +1,59 @@
+{% extends "__base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- home packages section starts  -->
+
+<section class="home-packages">
+  <h1 class="heading-title">arrangements</h1>
+
+  <div class="box-container">
+
+    {% for aranzman in aranzmani %}
+
+    <div class="box">
+      <div class="image">
+        <img src="{{ aranzman.1.smestaj.grad.image.url|cut:'tripify/' }}" alt="" />
+      </div>
+      <div class="content">
+        <h3>{{ aranzman.0.naziv }}</h3>
+        <div class="grid--2-cols details-container">
+          <p><i class="fas fa-location-arrow"></i><span> 
+            {{ aranzman.1.smestaj.grad.name }} 
+          </span></p>
+          <p><i class="fas fa-globe-europe"></i><span>{{ aranzman.0.prevoz.name }}</span></p>
+          <p><i class="fas fa-calendar"></i><span>
+            {{ aranzman.0.polazak|date:'d. m. Y.' }}
+          </span></p>
+          <p><i class="fas fa-calendar"></i><span>{{ aranzman.0.duzina }} days</span></p>
+          <p><i class="fas fa-euro-sign"></i><span>{{ aranzman.2 }}</span></p>
+        </div>
+        <a href="/vacation/?id={{ aranzman.0.id }}" class="btn">book now</a>
+      </div>
+    </div>
+    {% endfor %}
+  
+  </div>
+</section>
+
+
+<div class="pagination">
+  <span class="step-links">
+      {% if aranzmani.has_previous %}
+          <a href="?id={{ id }}&page=1">&laquo; first</a>
+          <a href="?id={{ id }}&page={{ aranzmani.previous_page_number }}">previous</a>
+      {% endif %}
+
+      <span class="current">
+          Page {{ aranzmani.number }} of {{ aranzmani.paginator.num_pages }}.
+      </span>
+
+      {% if aranzmani.has_next %}
+          <a href="?id={{ id }}&page={{ aranzmani.next_page_number }}">next</a>
+          <a href="?id={{ id }}&page={{ aranzmani.paginator.num_pages }}">last &raquo;</a>
+      {% endif %}
+  </span>
+</div>
+
+<!-- home packages section ends -->
+{% endblock content %}

@@ -7,7 +7,7 @@
         {% for termin in termini %}
         <div
           class="swiper-slide slide"
-          style="background: url({{ termin.smestaj.grad.image.url }}) no-repeat"
+          style="background: url({{ termin.smestaj.grad.image.url|cut:'tripify/' }}) no-repeat"
         ></div>
         {% endfor %}
 
@@ -37,11 +37,79 @@
           <p><i class="fas fa-calendar"></i><span>{{ aranzman.duzina }} days</span></p>
         </div>
 
+        <section class="home-packages">
+
         <h3 class="title">accomodation</h3>
-
         
+        <div class="smestaji">
+          {% for termin in termini %}
+          <div class="smestaj">
+            <div class="naziv">
+              {{ termin.smestaj.name }}
+            </div>
+            <div class="grad">
+              {{ termin.smestaj.grad.name }}
+            </div>
+            <div class="prevoz">
+              {{ termin.smestaj.cena_prevoza }}€ - {{ aranzman.prevoz.name }}
+            </div>
+            <div class="tip-smestaja">
+              {{ aranzman.smestaj.name }}
+            </div>
+            <div class="kategorija-smestaja">
+              Category {{ termin.smestaj.kategorija }}
+            </div>
+            <div class="additional">
+              <div class="internet">
+                Internet
+                {% if termin.smestaj.internet == True %}
+                  <i class="fas fa-check"></i>
+                {% else %}
+                X
+                {% endif %}
+              </div>
+              <div class="tv">
+                TV
+                {% if termin.smestaj.tv == True %}
+                  <i class="fas fa-check"></i>
+                {% else %}
+                X
+                {% endif %}
+              </div>
+              <div class="klima">
+                AC
+                {% if termin.smestaj.klima == True %}
+                  <i class="fas fa-check"></i>
+                {% else %}
+                X
+                {% endif %}
+              </div>
+              <div class="frizider">
+                Refrigerator
+                {% if termin.smestaj.sobni_frizider == True %}
+                  <i class="fas fa-check"></i>
+                {% else %}
+                X
+                {% endif %}
+              </div>
+            </div>
 
-        <h3 class="title">description</h3>
+            
+            <div class="grid">
+              {% for slika in slike_smestaja %}
+                {% if slika.smestaj == termin.smestaj %}
+                <img src="{{ slika.img.url|cut:"tripify/" }}" />
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+      </section>
+
+      
+      <h3 class="title">description</h3>
         <p class="description">
           {{ aranzman.opis|linebreaksbr }}
         </p>

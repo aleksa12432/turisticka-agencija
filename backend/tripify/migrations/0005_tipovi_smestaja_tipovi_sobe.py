@@ -3,8 +3,8 @@ from django.db import migrations
 def add_tipovi_smestaja(apps, schema_editor):
     Tipovi_smestaja = apps.get_model('tripify', 'Tipovi_smestaja')
     tipovi = [
-        ("hotelski"),
-        ("bungalovi"),
+        ("hotel"),
+        ("bungalow"),
     ]
 
     print("Popunjavam tipove smestaja...")

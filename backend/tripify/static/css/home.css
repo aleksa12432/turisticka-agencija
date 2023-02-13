@@ -208,3 +208,15 @@
   line-height: 2;
   padding: 1rem 0;
 }
+
+.pagination {
+  width: 100%;
+  display: flex;
+}
+
+.pagination .step-links {
+  font-size: 1.8rem;
+  margin: 0 auto;
+  display: flex;
+  gap: 10px;
+}

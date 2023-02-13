@@ -4,6 +4,7 @@ import requests
 from PIL import Image
 from io import BytesIO
 from django.core.files import File
+from django.conf import settings
 
 BROJ_DRZAVA = 30
 BROJ_GRADOVA = 90
@@ -22,6 +23,9 @@ def pronadji_sliku(search_term):
 
     print(f"Trazim sliku za {search_term}...")
 
+    if settings.MIGRATIONS_RUN_AS_TEST:
+        return "https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg"
+
     params = {
         "q": search_term, 
         "count": 1
@@ -34,8 +38,11 @@ def pronadji_sliku(search_term):
 
     search_results = response.json()
 
-    img_url = search_results["value"][0]["thumbnailUrl"]
-
+    try: 
+        img_url = search_results["value"][0]["thumbnailUrl"] # ako ne pronadje sliku
+    except:
+        img_url = "https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg"
+    
     print(f"Pronadjena slika: {img_url}")
     
     return img_url

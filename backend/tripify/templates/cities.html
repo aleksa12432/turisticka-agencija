@@ -1,0 +1,31 @@
+{% extends "__base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- home packages section starts  -->
+
+<section class="home-packages">
+
+  <h1 class="heading-title">Locations</h1>
+
+
+  <div class="box-container">
+
+    {% for grad in gradovi %}
+    <a href="/city/?id={{ grad.id }}" class="box">
+      <div class="image">
+        <img src="{{grad.image.url|cut:'tripify/'}}" alt="" />
+      </div>
+      <div class="content">
+        <h3>{{ grad.name }}</h3>
+      </div>
+    </a>
+    {% endfor %}
+
+
+  </div>
+
+</section>
+
+<!-- home packages section ends -->
+{% endblock content %}

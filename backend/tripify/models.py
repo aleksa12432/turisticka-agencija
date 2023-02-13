@@ -72,6 +72,10 @@ class Smestaj_slika(models.Model):
     img = models.ImageField(upload_to='tripify/static')
     smestaj = models.ForeignKey(Smestaj, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f"{self.smestaj.name} - {self.img.url}"
+    
+
 class Aranzman(models.Model):
     naziv = models.CharField(max_length=255, unique=True)
     opis = models.CharField(max_length=512)
@@ -98,3 +102,7 @@ class Termin(models.Model):
     aranzman = models.ForeignKey(Aranzman, on_delete=models.CASCADE)
     smestaj = models.ForeignKey(Smestaj, on_delete=models.CASCADE)
     vreme_stizanja = models.DateTimeField()
+
+    def __str__(self):
+        return f"{self.aranzman.naziv} - {self.smestaj.name}"
+    
