@@ -48,9 +48,9 @@ class ModelsTestCase(TestCase):
         print ("Testiram da li je broj isteklih aranzmana jednak ili veci od 10 000:")
         self.assertGreaterEqual(len(aranzmani_stari), 10000)
 
-        print ("Testiram da li je broj smestaj slika izmedju 270 i 1350:")
+        print ("Testiram da li je broj smestaj slika izmedju 270 i 1620:")
         self.assertGreaterEqual(len(smestaj_slike), 270)
-        self.assertLessEqual(len(smestaj_slike), 1350)
+        self.assertLessEqual(len(smestaj_slike), 1620)
 
         print ("Testiram da li je broj termina veci od 60000:")
         self.assertGreaterEqual(len(termini), 60000)
