@@ -24,5 +24,6 @@ urlpatterns = [
     path("book/", views.book, name='book'),
     path("package/", views.package, name='package'),
     path("vacation/", views.vacation, name='vacation'),
-
+    path("cities/", views.cities, name='cities'),
+    path("city/", views.city, name='city'),
 ]

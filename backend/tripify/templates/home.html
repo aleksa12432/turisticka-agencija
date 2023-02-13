@@ -54,10 +54,10 @@
 
   <div class="box-container">
     {% for kontinent in kontinenti %}
-    <div class="box">
+    <a href="cities/?id={{ kontinent.id }}" class="box">
       <img src="{% static kontinent.image %}" alt="" />
       <h3>{{ kontinent.name }}</h3>
-    </div>
+    </a>
     {% endfor %}
   </div>
 </section>
@@ -96,7 +96,7 @@
 
     <div class="box">
       <div class="image">
-        <img src="{{ aranzman.1.smestaj.grad.image.url }}" alt="" />
+        <img src="{{ aranzman.1.smestaj.grad.image.url|cut:'tripify/' }}" alt="" />
       </div>
       <div class="content">
         <h3>{{ aranzman.0.naziv }}</h3>
@@ -111,34 +111,15 @@
           <p><i class="fas fa-calendar"></i><span>{{ aranzman.0.duzina }} days</span></p>
           <p><i class="fas fa-euro-sign"></i><span>{{ aranzman.2 }}</span></p>
         </div>
-        <a href="{% url 'vacation' %}" class="btn">book now</a>
+        <a href="vacation/?id={{ aranzman.0.id }}" class="btn">book now</a>
       </div>
     </div>
     {% endfor %}
-
-  </div>
-
-  <h1 class="heading-title">Locations</h1>
-
-
-  <div class="box-container">
-
-    {% for grad in gradovi %}
-    <div class="box">
-      <div class="image">
-        <img src="{{grad.image.url}}" alt="" />
-      </div>
-      <div class="content">
-        <h3>{{ grad.name }}</h3>
-      </div>
-    </div>
-    {% endfor %}
-
 
   </div>
 
   <div class="load-more">
-    <a href="{% url 'package' %}" class="btn">load more</a>
+    <a href="/package" class="btn">See more</a>
   </div>
 </section>
 

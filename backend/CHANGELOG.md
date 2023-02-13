@@ -1,3 +1,44 @@
+# 12. februar 2023.
+
+### tripify/settings.py:
+- Dodato podesavanje za proveravanje testnog okruzenja
+- Baza prebacena sa MariaDB/MySQL na SQLite __ubrzalo pretragu x2__
+
+### tripify/templates/*.html:
+- Popravljen prikaz slika na novim generacijama
+
+### tripify/templates/vacation.html:
+- Namesten prikaz pojedinacnih aranzmana
+
+### tripify/templates/home.html:
+- Uklonjen prikaz gradova
+
+### tripify/templates/cities.html:
+- Prikaz gradova prebacen
+
+### tripify/templates/city.html:
+- Prikazuje sve aranzmane koji prolaze kroz taj grad
+
+### tripify/settings_test.py:
+- Podesavanja koja se koriste pri testiranju
+
+### tripify/migrations/0005_tipovi_smestaja_tipovi_sobe.py:
+- Prevedeni na engleski jezik
+
+### tripify/migrations/0006_tipovi_prevoza.py:
+- Prevedeni na engleski jezik
+
+### tripify/migrations/0003_countries_cities.py:
+- Proverava ako je testno okruzenje, u tom slucaju ne upotrebljava bing image search
+- Try catch block proverava ako je slika nadjena uopste, ako nije koristimo placeholder image
+
+### tripify/templates/package.html:
+- sada pretraga i stranicenje radi u potpunosti
+- dodato i biranje broja rezultata po strani
+
+### tripify/models.py:
+- dodate \_\_str\_\_ metode za modele zbog boljeg prikaza na admin stranici
+
 # 11. februar 2023. - inicijalizacija podataka zavrsena!
 
 ### tripify/migrations/0013_aranzmani.py:

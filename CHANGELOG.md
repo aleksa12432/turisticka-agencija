@@ -1,3 +1,11 @@
+# 13. februar 2023.
+
+### docs/BACKEND.md:
+- Dodatne informacije o backendu
+
+### .gitignore:
+- Dodat gitignore
+
 # 11. februar 2023.
 
 ### db/:

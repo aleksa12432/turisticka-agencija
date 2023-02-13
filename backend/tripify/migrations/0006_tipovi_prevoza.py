@@ -4,11 +4,11 @@ from django.db import migrations
 def add_tipovi_prevoza(apps, schema_editor):
     Tip_prevoza = apps.get_model('tripify', 'Tip_prevoza')
     tipovi = [
-        ("autobus"),
-        ("avion"),
-        ("brod"),
-        ("voz"),
-        ("samostalni prevoz")
+        ("bus"),
+        ("airplane"),
+        ("ship"),
+        ("train"),
+        ("self transport")
     ]
 
     print("Popunjavam tipove prevoza...")

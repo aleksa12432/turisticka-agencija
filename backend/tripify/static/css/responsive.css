@@ -18,6 +18,9 @@
   .home .slide .content h3 {
     font-size: 10vw;
   }
+  .smestaj .grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 768px) {

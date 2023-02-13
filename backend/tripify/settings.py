@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "tripify",
     "django_extensions",
+    "mathfilters",
 ]
 
 MIDDLEWARE = [
@@ -78,15 +79,10 @@ WSGI_APPLICATION = "tripify.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "tripify",
-        "USER": "tripify",
-        "PASSWORD": "WwLzf1uACU*8RDzA",
-        "HOST": "localhost",
-        "PORT": "3306",
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "tripify.db",
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -118,6 +114,7 @@ USE_I18N = True
 
 USE_TZ = False
 
+MIGRATIONS_RUN_AS_TEST = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
