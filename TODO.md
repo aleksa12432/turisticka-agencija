@@ -18,7 +18,7 @@
 - [X] Prikazi aranzmane na pocetnoj
 - [X] Napravi prikaz aranzmana sa pretragom i stranicenjem
 - [X] Napravi detaljan prikaz aranzmana
-- [ ] Napravi rezervacije
-- [ ] Napravi auth korisnika
+- [X] Napravi rezervacije
+- [X] Napravi auth korisnika
 - [X] Doradi admin stranicu
 - [X] Dodaj dokumentaciju
