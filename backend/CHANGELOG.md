@@ -1,3 +1,19 @@
+# 13. februar 2023.
+
+### tripify/models.py:
+- Dodat model Profile koji se nastavlja sa user-a
+- U modelu Aranzmana - dodat boolean "rezervisan"
+- Dodat model Rezervacije - prima profil korisnika i aranzman
+
+### tripify/forms.py:
+- sadrzi formu registracije korisnika
+
+### views:
+- Dodate login i register forme
+- Dodat prikaz rezervisanih aranzmana
+- Dodata opcija rezervacije aranzmana po specifikaciji
+- Dodato uklanjanje aranzmana 
+
 # 12. februar 2023.
 
 ### tripify/settings.py:

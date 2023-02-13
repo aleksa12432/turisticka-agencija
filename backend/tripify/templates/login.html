@@ -1,0 +1,15 @@
+{% extends "__base.html" %}
+{% load static %}
+{% block content %}
+  <div class="heading"
+       style="background: url({% static 'images/header-bg-1.png' %}) no-repeat">
+    <h1>login</h1>
+  </div>
+
+  <form method="post" class="register">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
+  <!-- about section starts  -->
+{% endblock content %}

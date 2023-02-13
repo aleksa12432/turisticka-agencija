@@ -259,3 +259,58 @@ section {
 .grid--2-cols {
   grid-template-columns: repeat(2, 1fr);
 }
+
+.register {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 0 auto;
+  font-size: 1.6rem;
+}
+
+.register p {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.register ul {
+  list-style: none;
+  margin-left: auto;
+  text-align: right;
+}
+
+
+.register input {
+  border: 1px solid black;
+  width: 100%;
+  text-transform: none;
+}
+
+.register textarea {
+  border: 1px solid black;
+  text-transform: none;
+}
+
+#id_payment_method {
+  display: flex;
+  gap: 20px;
+}
+
+#id_payment_method div > label {
+  display: flex;
+  gap: 10px;
+}
+
+.reservations {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  font-size: 1.6rem;
+  margin: 0 auto;
+  gap: 50px;
+  text-align: center;
+}
+
+.red {
+  color: red;
+}

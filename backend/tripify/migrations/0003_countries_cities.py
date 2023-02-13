@@ -9,7 +9,7 @@ from django.conf import settings
 BROJ_DRZAVA = 30
 BROJ_GRADOVA = 90
 
-SUBSCRIPTION_KEY = "a57ab44065774e448bf14a50de5e30fc"
+SUBSCRIPTION_KEY = "6b0f819c8b8d44828dcac4141f408a7c"
 SEARCH_URL = "https://api.bing.microsoft.com/v7.0/images/search"
 
 def jednako(df, imekolone, br):

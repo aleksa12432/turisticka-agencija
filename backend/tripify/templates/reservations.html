@@ -1,0 +1,34 @@
+{% extends "__base.html" %}
+{% load static %}
+{% block content %}
+  <div class="heading"
+       style="background: url({% static 'images/header-bg-1.png' %}) no-repeat">
+    <h1>reservations</h1>
+  </div>
+  <div class="reservations">
+  {% for reservation in reservations %}
+  <div class="reservation">
+  <p>
+  {{ reservation.aranzman.naziv }}
+  </p>
+  <p>
+    {{ reservation.broj_odraslih }} adults
+  </p>
+  <p>
+    {{ reservation.broj_dece }} children
+  </p>
+  <p>
+    Payment method: {{ reservation.get_nacin_placanja_display }}
+  </p>
+  Comment:
+  <p>
+    {{ reservation.komentar|linebreaksbr }}
+  </p>
+  <a href="/reservations/?cancel=&id={{ reservation.id }}" class='red'>
+    Cancel
+  </a>
+</div>
+  {% endfor %}
+</div>
+  <!-- about section starts  -->
+{% endblock content %}

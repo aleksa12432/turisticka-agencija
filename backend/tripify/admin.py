@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Continent, Country, City, Tipovi_smestaja, Tip_sobe, Tip_prevoza, Smestaj, Smestaj_slika, Aranzman, Termin
+from .models import Continent, Country, City, Tipovi_smestaja, Tip_sobe, Tip_prevoza, Smestaj, Smestaj_slika, Aranzman, Termin, Profile, Rezervacija
 
 admin.site.register(Continent)
 admin.site.register(Country)
@@ -11,3 +11,5 @@ admin.site.register(Smestaj)
 admin.site.register(Smestaj_slika)
 admin.site.register(Aranzman)
 admin.site.register(Termin)
+admin.site.register(Profile)
+admin.site.register(Rezervacija)
