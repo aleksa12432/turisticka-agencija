@@ -8,24 +8,20 @@
   </div>
   <!-- booking section starts  -->
   <section class="booking">
-    <h1 class="heading-title">book your trip!</h1>
-    <form action="{% url 'book' %}" method="post" class="book-form">
+    <h1 class="heading-title">book your trip at {{ aranzman.naziv }}!</h1>
+    <form method="post" class="register">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Book</button>
+    </form>
+    {% comment %} <form action="{% url 'book' %}" method="post" class="book-form">
       <div class="flex">
         <div class="inputBox">
-          <span>name :</span>
-          <input type="text" placeholder="enter your name" name="name" />
-        </div>
-        <div class="inputBox">
-          <span>email :</span>
-          <input type="email" placeholder="enter your email" name="email" />
-        </div>
-        <div class="inputBox">
-          <span>phone :</span>
-          <input type="number" placeholder="enter your number" name="phone" />
-        </div>
-        <div class="inputBox">
           <span>payment method :</span>
-          <input type="text" placeholder="enter your payment method" name="address" />
+          <select name="payment">
+            <option value="0">card</option>
+            <option value="1">cash</option>
+          </select>
         </div>
         <div class="inputBox">
           <span>where to :</span>
@@ -45,7 +41,7 @@
         </div>
       </div>
       <input type="submit" value="submit" class="btn" name="send" />
-    </form>
+    </form> {% endcomment %}
   </section>
   <!-- booking section ends -->
 {% endblock content %}

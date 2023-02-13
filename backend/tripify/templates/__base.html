@@ -30,7 +30,13 @@
         <a href="{% url 'index' %}">home</a>
         <a href="{% url 'about' %}">about</a>
         <a href="{% url 'package' %}">packages</a>
-        <a href="{% url 'book' %}">book</a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'reservations' %}">Your reservations</a>
+        <a href="{% url 'login' %}">Log out</a>
+        {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}">Register</a>
+        {% endif %}
         <a href="{% url 'package' %}" class="fas fa-search"></a>
       </nav>
       <form action="" class="search-bar-container">

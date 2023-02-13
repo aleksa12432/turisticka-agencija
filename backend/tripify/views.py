@@ -1,10 +1,13 @@
-from django.shortcuts import render
-from .models import Continent, Country, City, Aranzman, Termin, Smestaj, Smestaj_slika, Tip_prevoza
+from django.shortcuts import render, redirect
+from .models import Continent, Country, City, Aranzman, Termin, Smestaj, Smestaj_slika, Tip_prevoza, Profile, Rezervacija
 from datetime import datetime
 from django.http import (HttpResponseBadRequest)
 from django.core.paginator import Paginator
 import time
 from django.db.models import Sum, Q, F, OuterRef, Min, Subquery
+from .forms import RegisterForm, BookForm
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.forms import AuthenticationForm
 
 def index(request):
 
@@ -45,14 +48,49 @@ def about(request):
     return render(request, 'about.html')
 
 def book(request):
-    return render(request, 'book.html')
+
+    if not request.user.is_authenticated:
+        return redirect('register')
+    
+    id = None
+
+    try:
+        id = request.GET["id"]
+        aranzman = Aranzman.objects.get(pk=id)
+        if aranzman.rezervisan:
+            return redirect('/')
+    except:
+        return HttpResponseBadRequest("ID missing/unknown")
+
+    if request.method == 'POST':
+
+        form = BookForm(request.POST)
+
+        if form.is_valid():
+            comment = form.cleaned_data.get('comment')
+            payment_method = form.cleaned_data.get('payment_method')
+            number_of_adults = form.cleaned_data.get('number_of_adults')
+            number_of_children = form.cleaned_data.get('number_of_children')
+
+            profile = Profile.objects.get(user=request.user)
+
+            Rezervacija.objects.create(aranzman=aranzman, user=profile, broj_odraslih=number_of_adults, broj_dece=number_of_children, nacin_placanja=payment_method, komentar=comment)
+
+            aranzman.rezervisan = True
+            aranzman.save()
+
+            return redirect('/reservations/')
+
+    form = BookForm()
+
+    return render(request, 'book.html', { 'aranzman': aranzman, 'form': form })
 
 def package(request):
 
     kontinenti = Continent.objects.all()
     transporti = Tip_prevoza.objects.all()
 
-    aranzmani = Aranzman.objects.all()
+    aranzmani = Aranzman.objects.filter(rezervisan=False)
 
     start_time = time.time()
 
@@ -195,7 +233,8 @@ def city(request):
         termini.extend(list(Termin.objects.filter(smestaj__in=smestaji, vreme_stizanja__lt=datetime.today()).order_by('-vreme_stizanja')))
         for termin in termini:
             if not termin.aranzman in aranzmani:
-                aranzmani.append(termin.aranzman)
+                if not termin.aranzman.rezervisan:
+                    aranzmani.append(termin.aranzman)
     except:
         return HttpResponseBadRequest("ID missing/unknown")
 
@@ -224,3 +263,72 @@ def city(request):
     p = Paginator(aranzmani_list, 50)
 
     return render(request, 'city.html', { 'grad': grad, 'aranzmani': p.page(page), 'id': id })
+
+def register_view(request):
+    if request.user.is_authenticated:
+        redirect('index')
+
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+
+        if form.is_valid():
+            user = form.save()
+            # first_name = form.cleaned_data.get('first_name')
+            # last_name = form.cleaned_data.get('last_name')
+            # email = form.cleaned_data.get('email')
+            phone_number = form.cleaned_data.get('phone_number')
+            print(phone_number)
+            Profile.objects.create(user=user, phone_number=phone_number)
+            user.save()
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=user.username, password=raw_password)
+            login(request, user)
+            print("Uspesna registracija")
+            return redirect('index')
+    else:
+        form = RegisterForm()
+    
+    return render(request, 'register.html', { 'form': form })
+
+def login_view(request):
+    
+    if request.user.is_authenticated:
+        logout(request)
+    
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+
+        if form.is_valid():
+            print('valid form')
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                print(f"{user.username} logged in")
+                return redirect('index')
+    else:
+        form = AuthenticationForm()
+
+    return render(request, 'login.html', { 'form': form })
+
+def reservations(request):
+    
+    if not request.user.is_authenticated:
+        return redirect('/')
+
+    if "cancel" in request.GET and "id" in request.GET:
+        try:
+            reservation = Rezervacija.objects.get(pk=request.GET["id"])
+            aranzman = reservation.aranzman
+            aranzman.rezervisan = False
+            reservation.delete()
+            aranzman.save()
+        except:
+            return redirect('/reservations/')
+
+    profile = Profile.objects.get(user=request.user)
+    reservations = Rezervacija.objects.filter(user=profile)
+
+    return render(request, 'reservations.html', { 'reservations': reservations })

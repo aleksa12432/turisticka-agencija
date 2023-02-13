@@ -1,5 +1,8 @@
 from django.db import models
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class Continent(models.Model):
     name = models.CharField(max_length=100)
@@ -94,6 +97,9 @@ class Aranzman(models.Model):
             MinValueValidator(7)
         ]
     )
+    rezervisan = models.BooleanField(
+        default=False
+    )
 
     def __str__(self):
         return self.naziv
@@ -105,4 +111,40 @@ class Termin(models.Model):
 
     def __str__(self):
         return f"{self.aranzman.naziv} - {self.smestaj.name}"
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
+    phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
+
+    def __str__(self):
+        return self.user.username
+    
+
+class Rezervacija(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    aranzman = models.ForeignKey(Aranzman, on_delete=models.CASCADE)
+    broj_odraslih = models.IntegerField(
+        validators=[
+            MaxValueValidator(5),
+            MinValueValidator(1)
+        ]
+    )
+    broj_dece = models.IntegerField(
+        validators=[
+            MaxValueValidator(5),
+            MinValueValidator(1)
+        ]
+    )
+    NACINI_PLACANJA = [
+        (0, 'card'),
+        (1, 'cash')
+    ]
+    nacin_placanja = models.IntegerField(
+        choices=NACINI_PLACANJA
+    )
+    komentar = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.user.user.first_name} - {self.aranzman.naziv}"
     
