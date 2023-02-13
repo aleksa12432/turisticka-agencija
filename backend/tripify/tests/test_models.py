@@ -7,19 +7,17 @@ class ModelsTestCase(TestCase):
     
     def setUp(self):
 
-        with open('./tripify/tests/slika.jpg', 'rb') as f:
-            some_image_file = f
 
         # Create an instance of your model
         test_kontinent=Continent.objects.create(name="Test_kontinent", image="test")
         test_drzava=Country.objects.create(name="Test_drzava", continent=test_kontinent)
-        test_grad=City.objects.create(country=test_drzava, image=some_image_file, name="Test_grad")
-        test_prevoz=Tip_prevoza.objects.create(name="test_prevoz")
-        test_tip_smestaj=Tipovi_smestaja.objects.create(name="test_smestaj")
+        test_grad=City.objects.create(country=test_drzava, name="Test_grad")
+        test_prevoz=Tip_prevoza.objects.create(name="Test_prevoz")
+        test_tip_smestaj=Tipovi_smestaja.objects.create(name="Test_tip_smestaj")
         test_soba=Tip_sobe.objects.create(broj_ljudi=4, name="1/5")
-        test_smestaj = Smestaj.objects.create(grad=test_grad, tip_smestaja=test_tip_smestaj, tip_sobe=test_soba, cena_prevoza=5000, internet=True, kategorija=5, klima=False, name="Test_smestaj", sobni_frizider=True, tv=False)
-        test_aranzman = Aranzman.objects.create(prevoz=test_prevoz, smestaj=test_smestaj, cena=2000, duzina=8, naziv="test_aranzman", opis="test_opis", polazak=datetime.strptime('2022-03-11', '%Y-%m-%d'))
-        test_smestaj_slika=Smestaj_slika.objects.create(smestaj=test_smestaj, img=some_image_file)
+        test_smestaj = Smestaj.objects.create(grad=test_grad, tip_smestaja=test_tip_smestaj, tip_sobe=test_soba, cena_prevoza=5000,internet=True,  kategorija=5, klima=False, name="Test_smestaj", sobni_frizider=True, tv=False)
+        test_aranzman = Aranzman.objects.create(prevoz=test_prevoz, smestaj=test_tip_smestaj, cena=2000, duzina=8, naziv="Test_aranzman",  opis="test_opis", polazak=datetime.strptime('2022-03-11', '%Y-%m-%d'))
+        test_smestaj_slika=Smestaj_slika.objects.create(smestaj=test_smestaj)
         test_termin=Termin.objects.create(aranzman=test_aranzman, smestaj=test_smestaj, vreme_stizanja=datetime.strptime('2022-06-15', '%Y-%m-%d'))
 
     def test_your_model(self):
@@ -31,7 +29,7 @@ class ModelsTestCase(TestCase):
         country = Country.objects.get(name="Test_drzava", continent=continent)
 
         print ("Testiram da li se grad uspesno kreira:")
-        city = City.objects.get(country=country, image="test", name="Test_grad",)
+        city = City.objects.get(country=country, name="Test_grad",)
 
         print ("Testiram da li se tip prevoza uspesno kreira:")
         tip_prevoza = Tip_prevoza.objects.get(name="Test_prevoz")
@@ -46,13 +44,13 @@ class ModelsTestCase(TestCase):
         smestaj = Smestaj.objects.get(grad=city, tip_smestaja=tip_smestaja, tip_sobe=tip_sobe, cena_prevoza=5000, internet=True, kategorija=5, klima=False, name="Test_smestaj", sobni_frizider=True, tv=False)
 
         print ("Testiram da li se aranzman uspesno kreira:")
-        aranzman = Aranzman.objects.get(prevoz=tip_prevoza, smestaj=tip_smestaja, cena=2000, duzina=8, naziv="test_aranzman", opis="test_opis", polazak=datetime.strptime('2022-03-11', '%Y-%m-%d'))
+        aranzman = Aranzman.objects.get(prevoz=tip_prevoza, smestaj=tip_smestaja, cena=2000, duzina=8, naziv="Test_aranzman", opis="test_opis", polazak=datetime.strptime('2022-03-11', '%Y-%m-%d'))
 
         print ("Testiram da li se aranzman uspesno kreira:")
         smestaj_slika=Smestaj_slika.objects.get(smestaj=smestaj)
 
         print ("Testiram da li se termin uspesno kreira:")
-        termin=Termin.objects.get(aranzman=aranzman, smestsaj=smestaj)
+        termin=Termin.objects.get(aranzman=aranzman, smestaj=smestaj)
     
         print ("Testiram da li se kontinent uspesno dodaje u bazu:")
         self.assertEqual(continent.name, "Test_kontinent")
@@ -63,48 +61,47 @@ class ModelsTestCase(TestCase):
         self.assertEqual(country.continent, continent)
 
         print ("Testiram da li se grad uspesno dodaje u bazu:")
-        self.assertEqual(City.country, country)
-        self.assertEqual(City.image, "test")
-        self.assertEqual(City.name, "Test_grad")
+        self.assertEqual(city.country, country)
+        self.assertEqual(city.name, "Test_grad")
 
         print ("Testiram da li je tip prevoza uspesno dodat u bazu:")
-        self.assertEqual(Tip_prevoza.name, "Test_prevoz")
+        self.assertEqual(tip_prevoza.name, "Test_prevoz")
 
         print ("Testiram da li je tip smestaja uspesno dodat u bazu:")
-        self.assertEqual(Tipovi_smestaja.name, "Test_tip_smestaj")
+        self.assertEqual(tip_smestaja.name, "Test_tip_smestaj")
         
         print ("Testiram da li je tip sobe uspesno dodat u bazu:")
-        self.assertEqual(Tip_sobe.broj_ljudi, 4)
-        self.assertEqual(Tip_sobe.name, "1/5")
+        self.assertEqual(tip_sobe.broj_ljudi, 4)
+        self.assertEqual(tip_sobe.name, "1/5")
 
         print ("Testiram da li je smestaj uspesno dodat u bazu:")
-        self.assertEqual(Smestaj.grad,city)
-        self.assertEqual(Smestaj.tip_smestaja,tip_smestaja)
-        self.assertEqual(Smestaj.tip_sobe,tip_sobe)
-        self.assertEqual(Smestaj.cena_prevoza,5000)
-        self.assertEqual(Smestaj.internet,True)
-        self.assertEqual(Smestaj.kategorija,5)
-        self.assertEqual(Smestaj.klima,False)
-        self.assertEqual(Smestaj.name,"Test_smestaj")
-        self.assertEqual(Smestaj.sobni_frizider,True)
-        self.assertEqual(Smestaj.tv,False)
+        self.assertEqual(smestaj.grad,city)
+        self.assertEqual(smestaj.tip_smestaja,tip_smestaja)
+        self.assertEqual(smestaj.tip_sobe,tip_sobe)
+        self.assertEqual(smestaj.cena_prevoza,5000)
+        self.assertEqual(smestaj.internet,True)
+        self.assertEqual(smestaj.kategorija,5)
+        self.assertEqual(smestaj.klima,False)
+        self.assertEqual(smestaj.name,"Test_smestaj")
+        self.assertEqual(smestaj.sobni_frizider,True)
+        self.assertEqual(smestaj.tv,False)
 
         print ("Testiram da li se aranzman uspesno dodaje u bazu:")
-        self.assertEqual(Aranzman.prevoz,tip_prevoza)
-        self.assertEqual(Aranzman.smestaj,tip_smestaja)
-        self.assertEqual(Aranzman.cena,2000)
-        self.assertEqual(Aranzman.duzina,8)
-        self.assertEqual(Aranzman.naziv,"test_aranzman")
-        self.assertEqual(Aranzman.opis,"test_opis")
-        self.assertEqual(Aranzman.polazak,datetime.strptime('2022-03-11', '%Y-%m-%d'))
+        self.assertEqual(aranzman.prevoz,tip_prevoza)
+        self.assertEqual(aranzman.smestaj,tip_smestaja)
+        self.assertEqual(aranzman.cena,2000)
+        self.assertEqual(aranzman.duzina,8)
+        self.assertEqual(aranzman.naziv,"Test_aranzman")
+        self.assertEqual(aranzman.opis,"test_opis")
+        self.assertEqual(aranzman.polazak,datetime.strptime('2022-03-11', '%Y-%m-%d'))
 
         print ("Testiram da li se smestaj slika uspesno dodaje u bazu:")
-        self.assertEqual(Smestaj_slika.smestaj,smestaj)
+        self.assertEqual(smestaj_slika.smestaj,smestaj)
 
 
         print ("Testiram da li se termin uspesno dodaje u bazu:")
-        self.assertEqual(Termin.aranzman, aranzman)
-        self.assertEqual(Termin.smestaj, smestaj)
+        self.assertEqual(termin.aranzman, aranzman)
+        self.assertEqual(termin.smestaj, smestaj)
 
         continent.delete()
         country.delete()

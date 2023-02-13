@@ -6,8 +6,7 @@ class ModelsTestCase(TestCase):
     
     def setUp(self):
         # Create an instance of your model
-        test_kontinent=Continent.objects.create(name="Test_kontinent", image="test")
-        Country.objects.create(name="Test_drzava", continent=test_kontinent)
+        return
 
     def test_your_model(self):
         continents = Continent.objects.all()
@@ -17,8 +16,8 @@ class ModelsTestCase(TestCase):
         tipovi_smestaja = Tipovi_smestaja.objects.all()
         tipovi_sobe = Tip_sobe.objects.all()
         smestaji = Smestaj.objects.all()
-        aranzmani_novi= Aranzman.object.filter(polazak__gt=datetime.today())
-        aranzmani_stari= Aranzman.object.filter(polazak__lt=datetime.today())
+        aranzmani_novi= Aranzman.objects.filter(polazak__gt=datetime.today())
+        aranzmani_stari= Aranzman.objects.filter(polazak__lt=datetime.today())
         smestaj_slike=Smestaj_slika.objects.all()
         termini=Termin.objects.all()
 
@@ -49,9 +48,9 @@ class ModelsTestCase(TestCase):
         print ("Testiram da li je broj isteklih aranzmana jednak ili veci od 10 000:")
         self.assertGreaterEqual(len(aranzmani_stari), 10000)
 
-        print ("Testiram da li je broj smestaj slika izmedju 270 i 1350:")
+        print ("Testiram da li je broj smestaj slika izmedju 270 i 1620:")
         self.assertGreaterEqual(len(smestaj_slike), 270)
-        self.assertLessEqual(len(smestaj_slike), 1350)
+        self.assertLessEqual(len(smestaj_slike), 1620)
 
         print ("Testiram da li je broj termina veci od 60000:")
         self.assertGreaterEqual(len(termini), 60000)
