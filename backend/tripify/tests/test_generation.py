@@ -6,8 +6,7 @@ class ModelsTestCase(TestCase):
     
     def setUp(self):
         # Create an instance of your model
-        test_kontinent=Continent.objects.create(name="Test_kontinent", image="test")
-        Country.objects.create(name="Test_drzava", continent=test_kontinent)
+        return
 
     def test_your_model(self):
         continents = Continent.objects.all()
@@ -17,8 +16,8 @@ class ModelsTestCase(TestCase):
         tipovi_smestaja = Tipovi_smestaja.objects.all()
         tipovi_sobe = Tip_sobe.objects.all()
         smestaji = Smestaj.objects.all()
-        aranzmani_novi= Aranzman.object.filter(polazak__gt=datetime.today())
-        aranzmani_stari= Aranzman.object.filter(polazak__lt=datetime.today())
+        aranzmani_novi= Aranzman.objects.filter(polazak__gt=datetime.today())
+        aranzmani_stari= Aranzman.objects.filter(polazak__lt=datetime.today())
         smestaj_slike=Smestaj_slika.objects.all()
         termini=Termin.objects.all()
 
