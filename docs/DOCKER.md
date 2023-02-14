@@ -29,6 +29,7 @@ Ova linija izvršava testove za Django aplikaciju u kontejneru, koristeći tripi
     CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 Ova linija pokreće Django aplikaciju unutar kontejnera. Aplikacija će biti pokrenuta na adresi 0.0.0.0:8000.
 
+---
 
 ### *requirements*
      Django
