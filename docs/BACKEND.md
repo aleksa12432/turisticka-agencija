@@ -155,3 +155,87 @@ backend
 | tripify/views.py                                                   | fajl koji pokrece prikaze (template fajlove) i pozadinsku logiku (npr get requestove), ucitava sve podatke neophodne i passuje template fajlu                                                                                                                                                                                         |
 | tripify/wsgi.py                                                    | fajl koji sluzi kao entry point za python web aplikacije preko WSGI (Web Server Gateway Interface) protokola                                                                                                                                                                                                                          |
 | tripify.db                                                         | sqlite3 baza upotrebljena u projektu                                                                                                                                                                                                                                                                                                  |
+
+### Modeli:
+
+Modeli u Django-u su vazan deo framework-a jer definisu strukturu podataka sa kojima aplikacija radi. Modeli se koriste za kreiranje, upravljanje i manipulisanje podacima u bazi.
+
+U Django-u, model je Python klasa koja definise polja, tipove podataka i veze podataka. Pomazu da se osigura da su podaci skladisteni na nacin konzistentan sa ostatkom aplikacije i olaksavaju upravljanjem podacima iz pozadine
+
+![dijagram modela](../db/tripify_models.png)
+
+#### Continent
+- Predstavlja kontinent
+- name[CharField(100)] - naziv kontinenta
+- image[CharField(40)] - putanja do slike
+
+#### Country
+- Predstavlja drzavu
+- name[CharField(100)] - naziv drzave
+- continent[ForeignKey(Continent)] - kontinent kom pripada
+
+#### City
+- Predstavlja grad
+- name[CharField(100)] - naziv grada
+- country[ForeignKey(Country)] - drzava kojoj pripada
+- image[ImageField] - slika grada
+
+#### Tipovi_smestaja
+- Predstavljaju tipove smestaja
+- name[CharField(20)] - naziv tipa smestaja
+
+#### Tip_prevoza
+- Predstavlja tip prevoza
+- name[CharField(40)] - naziv tipa prevoza
+
+#### Tip_sobe
+- Predstavlja tip sobe za smestaj
+- name[CharField(20)] - naziv tipa sobe
+- broj_ljudi[IntegerField] - broj koliko ljudi soba prima
+
+#### Smestaj
+- Predstavlja smestaj
+- kategorija[IntegerField - [1, 5]] - predstavlja kategoriju smestaja
+- internet[BooleanField] - predstavlja da li smestaj ima internet
+- klima[BooleanField] - predstavlja da li smestaj ima klimu
+- sobni_frizider[BooleanField] - predstavlja da li smestaj ima sobni frizider
+- cena_prevoza[IntegerField - [100, 3000]] - predstavlja cenu prevoza do smestaja
+- grad[ForeignKey(City)] - predstavlja grad u kom se smestaj nalazi
+- tip_smestaja[ForeignKey(Tipovi_smestaja)] - predstavlja tip smestaja
+- tip_sobe[ForeignKey(Tip_sobe)] - predstavlja tip sobe
+
+#### Smestaj_slika
+- Predstavlja sliku za smestaj
+- img[ImageField] - predstavlja sliku
+- smestaj[ForeignKey(Smestaj)] - predstavlja smestaj kom slika pripada
+
+#### Aranzman
+- Predstavlja aranzman
+- naziv[CharField(255), unique] - naziv aranzmana
+- opis[CharField(512)] - opis aranzmana
+- prevoz[ForeignKey(Tip_prevoza)] - predstavlja tip prevoza za aranzman
+- smestaj[ForeignKey(Tipovi_smestaja)] - predstavlja tip smestaja za aranzman
+- cena[IntegerField - [500, 3000]] - predstavlja cenu aranzmana
+- polazak[DateTimeField] - predstavlja dan polaska aranzmana
+- duzina[IntegerField - [7, 14]] - predstavlja duzinu aranzmana u danima
+- rezervisan[BooleanField] - predstavlja da li je aranzman rezervisan
+
+#### Termin
+- Predstavlja pojedinacni termin aranzmana
+- aranzman[ForeignKey(Aranzman)] - aranzman kom termin pripada
+- smestaj[ForeignKey(Smestaj)] - smestaj kom termin pripada
+- vreme_stizanja[DateTimeField] - datum i vreme kad se stize u smestaj
+
+#### Profile
+- Predstavlja dodatne informacije pored onih ugradjeni u Django User
+- user[OneToOneField(User)] - predstavlja usera kom profil pripada
+- phone_number[CharField(17)] - predstavlja broj telefona korisnika
+
+#### Rezervacija
+- Predstavlja rezervaciju aranzmana
+- user[ForeignKey(Profile)] - predstavlja profil korisnika cija je rezervacija
+- aranzman[ForeignKey(Aranzman)] - predstavlja rezervisani aranzman
+- broj_odraslih[IntegerField - [1, 5]] - predstavlja broj odraslih u rezervaciji
+- broj_dece[IntegerField - [1, 5]] - predstavlja broj dece u rezervaciji
+- nacin_placanja[IntegerField] - predstavlja nacin placanja za aranzman
+- komentar[CharField(255)] - predstavlja komentar, posebne zahteve korisnika prilikom rezervacije aranzmana
