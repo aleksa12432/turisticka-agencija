@@ -26,5 +26,5 @@ Ova linija postavlja varijablu okruženja koja sprečava keširanje standardnog 
   
 Ova linija izvršava testove za Django aplikaciju u kontejneru, koristeći tripify.settings_test podešavanja.
 
-     RUN python manage.py migrate
-Ova linija izvršava testove za Django aplikaciju u kontejneru, koristeći tripify.settings_test podešavanja.
+    CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+Ova linija pokreće Django aplikaciju unutar kontejnera. Aplikacija će biti pokrenuta na adresi 0.0.0.0:8000.
