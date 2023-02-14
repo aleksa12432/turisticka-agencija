@@ -1,19 +1,20 @@
-# Use an official Python image as the base image
+# Python image za docker
 FROM python:3.8-slim-buster
 
-# Set the working directory
+# Direktorijum u kom radimo
 WORKDIR /app
 
-# Copy the requirements file and install dependencies
+# Kopiranje zahteva i zavisnosti 
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-# Copy the rest of the project files
+# Kopiranje project fajla
 COPY . .
 
-# Set environment variables 
+# Okruzenje 
 ENV PYTHONUNBUFFERED 1
 
+#Izvrsava testove za Django aplikaciju
 RUN python manage.py test --settings=tripify.settings_test
 
 # Run the Django migrations
