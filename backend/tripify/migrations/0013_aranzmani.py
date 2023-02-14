@@ -69,7 +69,7 @@ def add_aranzmane(apps, schema_editor):
         prevoz = random.choice(tipovi_prevoza)
         tip_smestaja = random.choice(tipovi_smestaja)
 
-        print(f"Termin pocinje: {dan}. {mesec}. {godina}")
+        # print(f"Termin pocinje: {dan}. {mesec}. {godina}")
 
         if godina not in zauzeti_gradovi:
             zauzeti_gradovi[godina] = {}
@@ -81,7 +81,7 @@ def add_aranzmane(apps, schema_editor):
 
         if len(cities) < MAX_LOKACIJA_PO_ARANZMANU:
             vreme += dateutil.relativedelta.relativedelta(months=-1)
-            print("Pomeram mesec unazad!")
+            # print("Pomeram mesec unazad!")
             continue
 
         # biramo nasumicni grad
@@ -89,10 +89,10 @@ def add_aranzmane(apps, schema_editor):
 
         zauzeti_gradovi[godina][mesec].append(city.name)
 
-        print(f"Izabran grad: {city.name}")
+        # print(f"Izabran grad: {city.name}")
 
         smestaj = random.choice(Smestaj.objects.filter(grad=city))
-        print(f"Izabran smestaj u gradu: {smestaj.name}")
+        # print(f"Izabran smestaj u gradu: {smestaj.name}")
 
         gradovi = [ city ]
         smestaji = [ smestaj ]
@@ -105,7 +105,7 @@ def add_aranzmane(apps, schema_editor):
 
         broj_lokacija = random.randint(1, MAX_LOKACIJA_PO_ARANZMANU)
 
-        print(f"Aranzman obuhvata {broj_lokacija} grad(a), ukupno trajanje {duzina_trajanja}")
+        # print(f"Aranzman obuhvata {broj_lokacija} grad(a), ukupno trajanje {duzina_trajanja}")
 
         for i in range(broj_lokacija):
 
@@ -134,7 +134,7 @@ def add_aranzmane(apps, schema_editor):
 
                 smestaj = random.choice(Smestaj.objects.filter(grad=izabrani_grad))
 
-                print(f"Termin {i+1}, izabran grad: {izabrani_grad.name}, izabran smestaj: {smestaj.name}")
+                # print(f"Termin {i+1}, izabran grad: {izabrani_grad.name}, izabran smestaj: {smestaj.name}")
 
                 gradovi.append(izabrani_grad)
                 smestaji.append(smestaj)
@@ -146,8 +146,8 @@ def add_aranzmane(apps, schema_editor):
 
             duzine_termina.append(random.randint(1, ostalo_dana - (broj_lokacija - i)))
 
-        for dt, duzina, grad, smestaj in zip(datetime_stizanja, duzine_termina, gradovi, smestaji):
-            print(f"Termin: {dt.strftime('%d. %m. %Y., %H:%M')},\n\ttrajanje: {duzina} dana\n\tgrad:{grad.name}\n\tsmestaj:{smestaj.name}")
+        # for dt, duzina, grad, smestaj in zip(datetime_stizanja, duzine_termina, gradovi, smestaji):
+        #     print(f"Termin: {dt.strftime('%d. %m. %Y., %H:%M')},\n\ttrajanje: {duzina} dana\n\tgrad:{grad.name}\n\tsmestaj:{smestaj.name}")
 
         
         polazak_vreme = datetime_stizanja[0] - dateutil.relativedelta.relativedelta(hours=random.randint(1,5), minutes=random.randint(0,59))
@@ -199,7 +199,7 @@ def add_aranzmane(apps, schema_editor):
         prevoz = random.choice(tipovi_prevoza)
         tip_smestaja = random.choice(tipovi_smestaja)
 
-        print(f"Termin pocinje: {dan}. {mesec}. {godina}")
+        # print(f"Termin pocinje: {dan}. {mesec}. {godina}")
 
         if godina not in zauzeti_gradovi:
             zauzeti_gradovi[godina] = {}
@@ -211,7 +211,7 @@ def add_aranzmane(apps, schema_editor):
 
         if len(cities) < MAX_LOKACIJA_PO_ARANZMANU:
             vreme += dateutil.relativedelta.relativedelta(months=1)
-            print("Pomeram mesec unapred!")
+            # print("Pomeram mesec unapred!")
             continue
 
         # biramo nasumicni grad
@@ -219,10 +219,10 @@ def add_aranzmane(apps, schema_editor):
 
         zauzeti_gradovi[godina][mesec].append(city.name)
 
-        print(f"Izabran grad: {city.name}")
+        # print(f"Izabran grad: {city.name}")
 
         smestaj = random.choice(Smestaj.objects.filter(grad=city))
-        print(f"Izabran smestaj u gradu: {smestaj.name}")
+        # print(f"Izabran smestaj u gradu: {smestaj.name}")
 
         gradovi = [ city ]
         smestaji = [ smestaj ]
@@ -235,7 +235,7 @@ def add_aranzmane(apps, schema_editor):
 
         broj_lokacija = random.randint(1, MAX_LOKACIJA_PO_ARANZMANU)
 
-        print(f"Aranzman obuhvata {broj_lokacija} grad(a), ukupno trajanje {duzina_trajanja}")
+        # print(f"Aranzman obuhvata {broj_lokacija} grad(a), ukupno trajanje {duzina_trajanja}")
 
         for i in range(broj_lokacija):
 
@@ -264,7 +264,7 @@ def add_aranzmane(apps, schema_editor):
 
                 smestaj = random.choice(Smestaj.objects.filter(grad=izabrani_grad))
 
-                print(f"Termin {i+1}, izabran grad: {izabrani_grad.name}, izabran smestaj: {smestaj.name}")
+                # print(f"Termin {i+1}, izabran grad: {izabrani_grad.name}, izabran smestaj: {smestaj.name}")
 
                 gradovi.append(izabrani_grad)
                 smestaji.append(smestaj)
@@ -276,8 +276,8 @@ def add_aranzmane(apps, schema_editor):
 
             duzine_termina.append(random.randint(1, ostalo_dana - (broj_lokacija - i)))
 
-        for dt, duzina, grad, smestaj in zip(datetime_stizanja, duzine_termina, gradovi, smestaji):
-            print(f"Termin: {dt.strftime('%d. %m. %Y., %H:%M')},\n\ttrajanje: {duzina} dana\n\tgrad:{grad.name}\n\tsmestaj:{smestaj.name}")
+        # for dt, duzina, grad, smestaj in zip(datetime_stizanja, duzine_termina, gradovi, smestaji):
+        #     print(f"Termin: {dt.strftime('%d. %m. %Y., %H:%M')},\n\ttrajanje: {duzina} dana\n\tgrad:{grad.name}\n\tsmestaj:{smestaj.name}")
 
         
         polazak_vreme = datetime_stizanja[0] - dateutil.relativedelta.relativedelta(hours=random.randint(1,5), minutes=random.randint(0,59))
@@ -316,12 +316,22 @@ def add_aranzmane(apps, schema_editor):
     
     print(f"{len(aranzman_instances)} aranzmana generisano za {time.time() - start_time} sekundi! Popunjavam!")
 
-    Aranzman.objects.bulk_create(aranzman_instances)
-    Termin.objects.bulk_create(termin_instances)
+    print("Popunjavam aranzmane...")
+
+    for aranzman in aranzman_instances:
+        aranzman.save()
+
+    # Aranzman.objects.bulk_create(aranzman_instances, batch_size=100)
 
     if (len(aranzman_instances) != BROJ_PROSLIH_ARANZMANA + BROJ_AKTUELNIH_ARANZMANA):
         raise AssertionError("Losa generacija termina! Zaustavljam!")
+    
+    print("Popunjavam termine...")
 
+    for termin in termin_instances:
+        termin.save()
+
+    # Termin.objects.bulk_create(termin_instances, batch_size=100)
 
 class Migration(migrations.Migration):
 
