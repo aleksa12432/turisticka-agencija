@@ -1,5 +1,10 @@
 # turisticka-agencija
 
+## Docs:
+- [Frontend docs](docs/FRONTEND.md)
+- [Backend docs](docs/BACKEND.md)
+- [QA docs](docs/TESTS.md)
+
 ## Readme:
 - [Frontend readme](frontend/README.md)
 - [Backend readme](backend/README.md)
