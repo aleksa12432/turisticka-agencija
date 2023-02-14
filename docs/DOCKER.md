@@ -38,5 +38,5 @@ Ova linija pokreće Django aplikaciju unutar kontejnera. Aplikacija će biti pok
      Pillow
      django-mathfilters
      requests
-    
-    *Python django biblioteke*
+   
+*Python django biblioteke*
