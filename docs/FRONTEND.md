@@ -49,3 +49,7 @@
 
 | Direktorijum/Fajl                                                  | Upotreba                                                                                                                                                                                                                                                                                                                              |
 |--------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| index.html                                                      | Početna stranica
+| about.html                                                      | Stranica za osnovne informacije o agenciji 
+| package.html                                                      | Stranica sadrži sve ponude za putovanja i opciju za filtriranje
+| vacation.html                                                      | Stranica za prikaz detalja za konkretno odabranu ponudu za putovanje 
