@@ -53,3 +53,10 @@
 | about.html                                                      | Stranica za osnovne informacije o agenciji 
 | package.html                                                      | Stranica sadrži sve ponude za putovanja i opciju za filtriranje
 | vacation.html                                                      | Stranica za prikaz detalja za konkretno odabranu ponudu za putovanje 
+| style.css                                                      | Stilovi za heading, footer i sve elemente koji se nalaze na više stranica
+| home.css                                                      | Stilovi za početnu stranicu
+| about.css                                                      | Stilovi za about stranicu
+| package.css                                                      | Stilovi za package stranicu
+| vacation.css                                                      | Stilovi za vacation stranicu
+| script.js                                                      | Celokupan javascript kod
+                                                       |
