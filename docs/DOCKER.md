@@ -1,6 +1,4 @@
----
 # Osnovne informacije
-___
 ## Docker
 
 
