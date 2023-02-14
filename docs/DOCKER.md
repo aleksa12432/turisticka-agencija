@@ -30,13 +30,13 @@ Ova linija izvršava testove za Django aplikaciju u kontejneru, koristeći tripi
 Ova linija pokreće Django aplikaciju unutar kontejnera. Aplikacija će biti pokrenuta na adresi 0.0.0.0:8000.
 
 
-*requirements*
-    Django
-    django-extensions
-    pydotplus
-    pandas
-    Pillow
-    django-mathfilters
-    requests
+### *requirements*
+     Django
+     django-extensions
+     pydotplus
+        pandas
+        Pillow
+        django-mathfilters
+        requests
     
     *Python django biblioteke*
