@@ -1,5 +1,6 @@
 from django.test import TestCase
-from tripify.models import Continent, Country, City, Tip_sobe, Tipovi_smestaja, Tip_prevoza, Smestaj, Aranzman, Smestaj_slika, Termin
+from tripify.models import Continent, Country, City, Tip_sobe, Tipovi_smestaja, Tip_prevoza, Smestaj, Aranzman, Smestaj_slika, Termin, Rezervacija, Profile
+from django.contrib.auth.models import User
 from datetime import datetime
 
 
@@ -19,6 +20,9 @@ class ModelsTestCase(TestCase):
         test_aranzman = Aranzman.objects.create(prevoz=test_prevoz, smestaj=test_tip_smestaj, cena=2000, duzina=8, naziv="Test_aranzman",  opis="test_opis", polazak=datetime.strptime('2022-03-11', '%Y-%m-%d'))
         test_smestaj_slika=Smestaj_slika.objects.create(smestaj=test_smestaj)
         test_termin=Termin.objects.create(aranzman=test_aranzman, smestaj=test_smestaj, vreme_stizanja=datetime.strptime('2022-06-15', '%Y-%m-%d'))
+        user = User.objects.create_user(username='test_user', email='user@email.com', password='test_password')
+        profile = Profile.objects.create(user=user, phone_number="+3811234567")
+        rezervacija = Rezervacija.objects.create(user=profile, aranzman=test_aranzman, broj_odraslih=5, broj_dece=2, nacin_placanja=1, komentar='test_komentar')
 
     def test_your_model(self):
         # Test that your model was created correctly
@@ -51,6 +55,17 @@ class ModelsTestCase(TestCase):
 
         print ("Testiram da li se termin uspesno kreira:")
         termin=Termin.objects.get(aranzman=aranzman, smestaj=smestaj)
+
+        print ("Testiram da li se user uspesno kreira:")
+        user=User.objects.get(username='test_user', email='user@email.com')
+
+        print ("Testiram da li se profil uspesno kreira:")
+        profil=Profile.objects.get(user=user)
+
+        print ("Testiram da li se rezervacija uspesno kreira:")
+        rezervacija=Rezervacija.objects.get(user=profil, aranzman=aranzman)
+
+    
     
         print ("Testiram da li se kontinent uspesno dodaje u bazu:")
         self.assertEqual(continent.name, "Test_kontinent")
@@ -98,10 +113,20 @@ class ModelsTestCase(TestCase):
         print ("Testiram da li se smestaj slika uspesno dodaje u bazu:")
         self.assertEqual(smestaj_slika.smestaj,smestaj)
 
-
         print ("Testiram da li se termin uspesno dodaje u bazu:")
         self.assertEqual(termin.aranzman, aranzman)
         self.assertEqual(termin.smestaj, smestaj)
+
+        print ("Testiram da li se user uspesno dodaje u bazu:")
+        self.assertEqual(user.username, 'test_user')
+        self.assertEqual(user.email, 'user@email.com')
+
+        print ("Testiram da li se profil uspesno dodaje u bazu:")
+        self.assertEqual(profil.user, user)
+
+        print ("Testiram da li se rezervacija uspesno dodaje u bazu:")
+        self.assertEqual(rezervacija.user, profil)
+        self.assertEqual(rezervacija.aranzman, aranzman)
 
         continent.delete()
         country.delete()
@@ -113,3 +138,6 @@ class ModelsTestCase(TestCase):
         aranzman.delete()
         smestaj_slika.delete()
         termin.delete()
+        user.delete()
+        profil.delete()
+        rezervacija.delete()
