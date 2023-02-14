@@ -13,6 +13,7 @@ Docker je open-source platforma za razvoj, dostavu i pokretanje aplikacija u kon
 + Docker se često koristi u modernom softverskom razvoju, posebno za razvoj mikroservisa i kontinuiranu dostavu aplikacija. Kontejneri su takođe korisni za testiranje i razvoj na različitim platformama, kao i za osiguravanje da se aplikacije uviek pokreću u istom okruženju, bez obzira na to gde se izvode.
 + Korištćenje Docker-a može smanjiti vreme i napore koje programeri ulažu u postavljanje okruženja i razvoj aplikacija, što ga čini popularnim među programerima.
 
+---
 #### *Dockerfile*
 
     FROM python:3.8-slim-buster
@@ -56,8 +57,8 @@ Ovaj kod predstavlja Docker Compose datoteku koja opisuje Docker uslugu nazvanu 
 Konkretno, ovaj kod opisuje Docker uslugu koja se gradi iz izvornog koda trenutnog direktorijuma gde se datoteka nalazi (naredba ** 'build: .** '), a zatim pokreće Django aplikaciju s naredbom ** 'python manage.py runserver ' ** na adresi ** 0.0.0.0:8000. ** Volumes se koriste za mapiranje lokalnih direktorijuma na direktorijume u Docker kontejneru, što omogućava promene u izvornom kodu bez potrebe ponovnog pokretanja kontejnera. Naredba ports mapira port 8000 iz Docker kontejnera na port 8000 lokalnog računala.
 
 Ova Docker usluga bi se mogla pokrenuti s naredbom ** docker-compose up ** kako bi se pokrenula Django aplikacija. Ovaj primer je samo jedan od mnogih načina kako se može koristiti Docker Compose kako bi se pojednostavio postupak razvoja i razmeštaja aplikacija.
+---
 
-*Python django biblioteke*
 
 #### *requirements*
 
@@ -68,3 +69,5 @@ Ova Docker usluga bi se mogla pokrenuti s naredbom ** docker-compose up ** kako 
     Pillow
     django-mathfilters
     requests
+
+*Python django korišćene biblioteke*
