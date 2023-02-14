@@ -69,3 +69,6 @@
 - #fff
 - #fff9
 - #8e44ad
+
+### Ikonice preuzete sa:
+- https://fontawesome.com/icons
