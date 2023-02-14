@@ -2,7 +2,7 @@ from django.test import TestCase
 from tripify.models import Continent, Country, City, Tip_sobe, Tipovi_smestaja, Tip_prevoza, Smestaj, Aranzman, Smestaj_slika, Termin
 from datetime import datetime
 
-class ModelsTestCase(TestCase):
+class GenerationTestCase(TestCase):
     
     def setUp(self):
         # Create an instance of your model

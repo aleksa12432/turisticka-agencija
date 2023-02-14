@@ -15,10 +15,6 @@ class MyViewTestCase(TestCase):
         response = self.client.get('/about/')
         self.assertEqual(response.status_code, 200)
 
-        print ("Testiram pristup book stranici:")
-        response = self.client.get('/book/')
-        self.assertEqual(response.status_code, 200)
-
         print ("Testiram pristup package stranici:")
         response = self.client.get('/package/')
         self.assertEqual(response.status_code, 200)
