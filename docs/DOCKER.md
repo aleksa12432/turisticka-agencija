@@ -17,7 +17,7 @@ Docker je open-source platforma za razvoj, dostavu i pokretanje aplikacija u kon
 #### *Dockerfile*
 
     FROM python:3.8-slim-buster
-Ova linija postavlja osnovnu sliku na Python 3.8 sa slim verzijom Debiijan "buster" operativnog sistema.
+Ova linija postavlja osnovnu sliku na Python 3.8 sa slim verzijom Debian "buster" operativnog sistema.
 
      WORKDIR /app
 Ova linija postavlja radni direktorijum na /app unutar kontejnera.
