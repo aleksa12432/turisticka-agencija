@@ -34,9 +34,9 @@ Ova linija pokreće Django aplikaciju unutar kontejnera. Aplikacija će biti pok
      Django
      django-extensions
      pydotplus
-        pandas
-        Pillow
-        django-mathfilters
-        requests
+     pandas
+     Pillow
+     django-mathfilters
+     requests
     
     *Python django biblioteke*
