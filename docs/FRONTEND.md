@@ -59,4 +59,13 @@
 | package.css                                                      | Stilovi za package stranicu
 | vacation.css                                                      | Stilovi za vacation stranicu
 | script.js                                                      | Celokupan javascript kod
-                                                       |
+
+### Korišćene boje:
+- #eee
+- #333
+- #eee
+- #777
+- #222
+- #fff
+- #fff9
+- #8e44ad
